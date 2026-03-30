@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact &amp; Support — Spec Before You Ship</title>
+<meta name="description" content="Get help with the tutorial, report an issue, or just say hello.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&family=Geist:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css">
+<style>
+  /* ─── Page column ────────────────────────────────── */
+  .col {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 2.5rem;
+  }
+
+  /* ─── Page header ────────────────────────────────── */
+  .page-header {
+    padding: 5rem 0 4rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+    margin-bottom: 1.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .eyebrow::after {
+    content: '';
+    display: block;
+    width: 2rem;
+    height: 1px;
+    background: var(--accent);
+    opacity: 0.5;
+  }
+
+  .page-header h1 {
+    font-family: var(--serif);
+    font-size: clamp(2.5rem, 7vw, 4rem);
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+  }
+
+  .page-header h1 em {
+    font-style: italic;
+    color: var(--ink-3);
+  }
+
+  .page-intro {
+    font-size: 1.05rem;
+    color: var(--ink-2);
+    line-height: 1.75;
+    font-weight: 300;
+    max-width: 480px;
+  }
+
+  /* ─── Two-column layout ──────────────────────────── */
+  .contact-layout {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 5rem;
+    padding: 4.5rem 0 6rem;
+    align-items: start;
+  }
+
+  /* ─── Form ───────────────────────────────────────── */
+  .contact-form { }
+
+  .form-section-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--ink-3);
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .form-section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .form-row.full { grid-template-columns: 1fr; }
+
+  .field { display: flex; flex-direction: column; gap: 6px; }
+
+  .field label {
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ink-3);
+  }
+
+  .field input,
+  .field select,
+  .field textarea {
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 300;
+    padding: 11px 14px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.15s, background 0.15s;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+
+  .field input:focus,
+  .field select:focus,
+  .field textarea:focus {
+    border-color: var(--accent);
+    background: #fff;
+  }
+
+  .field input::placeholder,
+  .field textarea::placeholder { color: var(--ink-3); }
+
+  .field select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%238a8780'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
+    cursor: pointer;
+  }
+
+  .field textarea {
+    resize: vertical;
+    min-height: 140px;
+    line-height: 1.65;
+  }
+
+  .form-footer {
+    margin-top: 1.75rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .submit-btn {
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 13px 24px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+
+  .submit-btn:hover { background: #a84908; }
+
+  .form-note {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-3);
+  }
+
+  /* ─── Sidebar info ───────────────────────────────── */
+  .contact-sidebar { }
+
+  .info-block {
+    margin-bottom: 2.5rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .info-block:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .info-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+  }
+
+  .info-block p {
+    font-size: 13px;
+    color: var(--ink-2);
+    line-height: 1.65;
+    font-weight: 300;
+    margin-bottom: 0.75rem;
+  }
+
+  .info-block p:last-child { margin-bottom: 0; }
+
+  .info-link {
+    font-size: 13px;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 400;
+  }
+
+  .info-link:hover { text-decoration: underline; }
+
+  .response-time {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-3);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 4px 10px;
+    margin-top: 0.5rem;
+  }
+
+  .response-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #639922;
+    flex-shrink: 0;
+  }
+
+  /* ─── FAQ ────────────────────────────────────────── */
+  .faq {
+    padding: 0 0 6rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .faq-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--ink-3);
+    margin: 3rem 0 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .faq-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .faq-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem 3rem;
+  }
+
+  .faq-item {}
+
+  .faq-q {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    color: var(--ink);
+    line-height: 1.4;
+    margin-bottom: 0.6rem;
+  }
+
+  .faq-a {
+    font-size: 13px;
+    color: var(--ink-3);
+    line-height: 1.65;
+    font-weight: 300;
+  }
+
+  .faq-a a { color: var(--accent); text-decoration: none; }
+  .faq-a a:hover { text-decoration: underline; }
+
+  /* ─── Footer override (contact uses narrower column) ─ */
+  .footer-inner { max-width: 680px; }
+
+  /* ─── Responsive ─────────────────────────────────── */
+  @media (max-width: 700px) {
+    .col { padding: 0 1.5rem; }
+    .page-header { padding: 3.5rem 0 3rem; }
+    .contact-layout { grid-template-columns: 1fr; gap: 3.5rem; padding: 3.5rem 0 5rem; }
+    .contact-sidebar { order: -1; }
+    .form-row { grid-template-columns: 1fr; }
+    .faq-grid { grid-template-columns: 1fr; gap: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="index.html" class="brand">Spec Before You Ship</a>
+  <nav>
+    <ul class="header-nav">
+      <li><a href="01-the-chaos-tax.html">Lessons</a></li>
+      <li><a href="contact.html" class="current">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<div class="col">
+
+  <!-- Page header -------------------------------------------- -->
+  <header class="page-header">
+    <div class="eyebrow">Support</div>
+    <h1>Get in touch.<br><em>I read everything.</em></h1>
+    <p class="page-intro">
+      Have a question about a lesson? Hit a snag with the tooling? Just want to share what you shipped? I'd love to hear from you.
+    </p>
+    <br />
+    <p class="page-intro">
+      Forms are annoying, I know. If you prefer, you can also reach out by email at <a href="mailto:robertfauver@gmail.com">robertfauver@gmail.com</a>
+    </p>
+  </header>
+
+  <!-- Contact form + sidebar ---------------------------------- -->
+  <div class="contact-layout">
+
+    <!-- Form -->
+    <section class="contact-form">
+      <div class="form-section-label">Send a message</div>
+
+      <!-- Replace action="#" with your form handler (Formspree, Netlify Forms, etc.) -->
+      <form action="#" method="post">
+        <div class="form-row">
+          <div class="field">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" placeholder="Your name" required>
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="your@email.com" required>
+          </div>
+        </div>
+
+        <div class="form-row full">
+          <div class="field">
+            <label for="topic">Topic</label>
+            <select id="topic" name="topic">
+              <option value="">Select a topic…</option>
+              <option value="lesson-question">Question about a lesson</option>
+              <option value="tool-issue">Issue with the tooling</option>
+              <option value="feedback">Feedback or suggestion</option>
+              <option value="other">Something else</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row full">
+          <div class="field">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="What's on your mind?" required></textarea>
+          </div>
+        </div>
+
+        <div class="form-footer">
+          <button type="submit" class="submit-btn">Send message →</button>
+          <span class="form-note">I'll reply within 1–2 business days.</span>
+        </div>
+      </form>
+    </section>
+
+    <!-- Sidebar info -->
+    <aside class="contact-sidebar">
+
+      <div class="info-block">
+        <div class="info-label">Response time</div>
+        <p>I aim to reply to all messages within one to two business days.</p>
+        <span class="response-time">
+          <span class="response-dot"></span>
+          Usually within 24 hours
+        </span>
+      </div>
+
+      <div class="info-block">
+        <div class="info-label">For urgent issues</div>
+        <p>
+          If you've found a bug in a lesson or the companion skill is giving
+          you unexpected results, include the lesson number and a short description
+          of what you expected vs. what happened.
+        </p>
+      </div>
+
+      <div class="info-block">
+        <div class="info-label">Community</div>
+        <p>
+          You're not alone in this. Other developers are working through the same
+          lessons. Share what you're building.
+        </p>
+        <p>
+          <a href="index.html" class="info-link">← Back to the tutorial</a>
+        </p>
+      </div>
+
+    </aside>
+
+  </div>
+
+  <!-- FAQ ---------------------------------------------------- -->
+  <section class="faq">
+    <div class="faq-label">Common questions</div>
+    <div class="faq-grid">
+
+      <div class="faq-item">
+        <div class="faq-q">Is this tutorial really free?</div>
+        <div class="faq-a">Yes, all 11 lessons are free and always will be. No account required, no paywall.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Which AI tools does this work with?</div>
+        <div class="faq-a">BridgeSpec works alongside any AI coding tool—Claude, Copilot, Cursor, Windsurf, or anything else that reads files in your project.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Do I need prior experience with specs?</div>
+        <div class="faq-a">No. <a href="01-the-chaos-tax.html">Lesson 01</a> starts from scratch and builds the habit from the ground up.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">What's the companion skill?</div>
+        <div class="faq-a">It's a Claude Code skill that lives in your project and walks you through lessons interactively, adapting to your stack. Find it in each lesson's sidebar.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Can I use this with a team?</div>
+        <div class="faq-a">Absolutely. Specs and design docs are even more valuable in teams—and most of the patterns in this tutorial are designed to scale to collaborative workflows.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">How long does the full tutorial take?</div>
+        <div class="faq-a">Each lesson is designed to be completable in 20–40 minutes. The full 11-lesson course can be done in a weekend, or stretched across a couple of weeks.</div>
+      </div>
+
+    </div>
+  </section>
+
+</div><!-- /.col -->
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span class="footer-copy">&copy; 2026 BridgeSpec &mdash; <span class="footer-attribution">Created by <a href="https://robertfauver.com">Robert Fauver</a></span></span>
+    <ul class="footer-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="01-the-chaos-tax.html">Start Learning</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <span class="footer-version">v0.0.1-alpha</span>
+  </div>
+</footer>
+
+</body>
+</html>

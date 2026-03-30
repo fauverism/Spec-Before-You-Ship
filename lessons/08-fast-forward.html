@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fast-Forward — Spec Before You Ship</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&family=Geist:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css">
+<style>
+  .layout { display: grid; grid-template-columns: 240px 1fr; min-height: 100vh; max-width: 1100px; margin: 0 auto; }
+
+  .sidebar { border-right: 1px solid var(--border); padding: 2.5rem 1.5rem; position: sticky; top: 0; height: 100vh; overflow-y: auto; }
+  .sidebar-label { font-family: var(--mono); font-size: 10px; font-weight: 500; color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem; }
+  .sidebar-title { font-family: var(--serif); font-size: 1.05rem; line-height: 1.4; color: var(--ink); margin-bottom: 1.5rem; }
+  .sidebar nav { margin-bottom: 2rem; }
+  .sidebar nav a { display: block; font-size: 13px; font-weight: 300; color: var(--ink-3); text-decoration: none; padding: 5px 0; line-height: 1.4; }
+  .sidebar nav a:hover { color: var(--ink); }
+  .sidebar nav a.current { color: var(--accent); font-weight: 500; }
+  .sidebar nav a .num { font-family: var(--mono); font-size: 10px; color: var(--ink-3); margin-right: 6px; }
+  .sidebar nav a.current .num { color: var(--accent); opacity: 0.7; }
+  .companion-box { border: 1px solid var(--border); border-radius: 6px; padding: 1rem; background: var(--surface); }
+  .companion-box .companion-label { font-family: var(--mono); font-size: 10px; color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
+  .companion-box p { font-size: 12px; color: var(--ink-2); line-height: 1.6; margin-bottom: 8px; }
+  .companion-box .skill-file { font-family: var(--mono); font-size: 10px; color: var(--ink-3); }
+
+  .main { padding: 4rem 3.5rem 6rem; max-width: 720px; }
+  .breadcrumb { font-family: var(--mono); font-size: 11px; color: var(--ink-3); margin-bottom: 2.5rem; display: flex; align-items: center; gap: 6px; }
+  .breadcrumb a { color: var(--ink-3); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--ink); }
+  .breadcrumb .sep { opacity: 0.4; }
+
+  .lesson-num { font-family: var(--mono); font-size: 11px; color: var(--ink-3); margin-bottom: 0.5rem; }
+  h1 { font-family: var(--serif); font-size: 2.6rem; font-weight: 400; line-height: 1.1; margin-bottom: 0.75rem; letter-spacing: -0.01em; }
+  .subtitle { font-size: 1.05rem; color: var(--ink-2); font-weight: 300; line-height: 1.6; margin-bottom: 2.5rem; padding-bottom: 2.5rem; border-bottom: 1px solid var(--border); }
+
+  .lesson p { font-size: 1rem; line-height: 1.75; color: var(--ink-2); margin-bottom: 1.25rem; font-weight: 300; }
+  .lesson p strong { color: var(--ink); font-weight: 500; }
+  .lesson h2 { font-family: var(--sans); font-size: 1.05rem; font-weight: 500; color: var(--ink); margin: 2.5rem 0 0.75rem; padding-top: 2.5rem; border-top: 1px solid var(--border); letter-spacing: -0.01em; }
+  .lesson h2:first-of-type { margin-top: 1.5rem; padding-top: 1.5rem; }
+  .lesson code:not(.block) { font-family: var(--mono); font-size: 0.82em; background: var(--surface); border: 1px solid var(--border); border-radius: 3px; padding: 1px 5px; color: var(--ink); }
+
+  .code-block { margin: 1.5rem 0; border-radius: 8px; overflow: hidden; border: 1px solid #2a2830; }
+  .code-header { background: #22202a; padding: 8px 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .code-filename { font-family: var(--mono); font-size: 11px; color: #807d88; }
+  .code-lang { font-family: var(--mono); font-size: 10px; color: #504d5a; text-transform: uppercase; letter-spacing: 0.06em; }
+
+  pre { background: var(--code-bg); padding: 1.25rem 1.5rem; overflow-x: auto; margin: 0; line-height: 1.7; }
+  pre code { font-family: var(--mono); font-size: 13px; color: var(--code-fg); display: block; }
+
+  .t-comment { color: var(--code-comment); font-style: italic; }
+  .t-h1 { color: var(--code-type); font-weight: 500; }
+  .t-h2 { color: var(--code-type); }
+  .t-h3 { color: #c792ea; }
+  .t-plain { color: var(--code-fg); }
+  .t-dim { color: #504d5a; }
+  .t-string { color: var(--code-string); }
+  .t-you { color: #89ddff; }
+  .t-ai { color: #c3e88d; }
+  .t-good { color: #6a9f6a; }
+  .t-warn { color: #c9a84c; }
+  .t-check-done { color: #6a9f6a; }
+  .t-check-open { color: #504d5a; }
+  .t-file { color: #89ddff; }
+
+  .shell-block { margin: 1.5rem 0; border-radius: 8px; overflow: hidden; border: 1px solid #2a2830; background: var(--code-bg); }
+  .shell-block pre { padding: 1rem 1.25rem; }
+  .t-shell-prompt { color: var(--code-comment); user-select: none; }
+  .t-shell-out { color: #6a9f6a; }
+
+  .callout { border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 6px; padding: 1rem 1.25rem; background: var(--accent-bg); margin: 1.5rem 0; }
+  .callout .callout-label { font-family: var(--mono); font-size: 10px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); margin-bottom: 6px; }
+  .callout p { font-size: 14px; color: var(--ink-2); margin: 0 !important; line-height: 1.65; }
+  .callout p + p { margin-top: 0.5rem !important; }
+
+  .warn { border: 1px solid var(--warn-border); border-radius: 6px; padding: 1rem 1.25rem; background: var(--warn-bg); margin: 1.5rem 0; }
+  .warn .warn-label { font-family: var(--mono); font-size: 10px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; color: var(--amber); margin-bottom: 6px; }
+  .warn p { font-size: 14px; color: var(--ink-2); margin: 0 !important; line-height: 1.65; }
+
+  /* ff vs manual comparison table */
+  .compare-table { margin: 1.5rem 0; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+  .ct-header { display: grid; grid-template-columns: 1fr 1fr 1fr; background: var(--surface); border-bottom: 1px solid var(--border); }
+  .ct-header div { padding: 8px 14px; font-family: var(--mono); font-size: 11px; font-weight: 500; color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.06em; }
+  .ct-header div:not(:last-child) { border-right: 1px solid var(--border); }
+  .ct-row { display: grid; grid-template-columns: 1fr 1fr 1fr; border-bottom: 1px solid var(--border); }
+  .ct-row:last-child { border-bottom: none; }
+  .ct-cell { padding: 10px 14px; font-size: 13px; line-height: 1.55; }
+  .ct-cell:not(:last-child) { border-right: 1px solid var(--border); }
+  .ct-artifact { color: var(--ink); font-weight: 500; font-family: var(--mono); font-size: 12px; }
+  .ct-ff { color: var(--ink-2); }
+  .ct-manual { color: var(--ink-2); }
+  .ct-green { color: #6a9f6a; }
+  .ct-amber { color: #c9a84c; }
+
+  /* when to use grid */
+  .when-grid { margin: 1.5rem 0; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .when-card { border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+  .when-header { padding: 10px 14px; border-bottom: 1px solid var(--border); }
+  .when-title { font-family: var(--mono); font-size: 12px; font-weight: 500; }
+  .when-title.manual { color: var(--accent); }
+  .when-title.ff { color: #6a9f6a; }
+  .when-body { padding: 10px 14px; display: flex; flex-direction: column; gap: 6px; }
+  .when-item { font-size: 13px; color: var(--ink-2); line-height: 1.5; display: flex; gap: 8px; }
+  .when-item::before { content: '→'; font-family: var(--mono); color: var(--ink-3); flex-shrink: 0; }
+  @media (max-width: 560px) { .when-grid { grid-template-columns: 1fr; } }
+
+  /* ai exchange */
+  .ai-exchange { margin: 1.5rem 0; border: 1px solid #2a2830; border-radius: 8px; overflow: hidden; }
+  .ae-row { padding: 0.9rem 1.25rem; border-bottom: 1px solid #2a2830; }
+  .ae-row:last-child { border-bottom: none; }
+  .ae-label { font-family: var(--mono); font-size: 10px; color: #504d5a; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 5px; }
+  .ae-text { font-family: var(--mono); font-size: 13px; line-height: 1.7; }
+  .ae-you .ae-text { color: #89ddff; }
+  .ae-ai { background: #1c1b22; }
+  .ae-ai .ae-text { color: #c3e88d; }
+
+  .file-tree { margin: 1.5rem 0; border-radius: 8px; overflow: hidden; border: 1px solid #2a2830; }
+  .file-tree pre { background: var(--code-bg); padding: 1.25rem 1.5rem; }
+  .file-tree code { font-family: var(--mono); font-size: 13px; color: var(--code-fg); display: block; line-height: 1.9; }
+  .ft-dir { color: var(--code-type); }
+  .ft-new { color: var(--code-string); }
+  .ft-done { color: #6a9f6a; }
+  .ft-dim { color: #504d5a; }
+
+  .checkpoint { border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem 1.5rem; background: var(--surface); margin: 2rem 0; }
+  .checkpoint .checkpoint-label { font-family: var(--mono); font-size: 10px; color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.75rem; }
+  .checkpoint ul { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+  .checkpoint li { font-size: 13px; color: var(--ink-2); display: flex; align-items: flex-start; gap: 8px; line-height: 1.5; }
+  .checkpoint li::before { content: '✓'; color: var(--green); font-family: var(--mono); font-size: 12px; flex-shrink: 0; margin-top: 1px; }
+
+  .next-lesson { margin-top: 3.5rem; padding-top: 2rem; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+  .next-lesson .next-label { font-family: var(--mono); font-size: 10px; color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
+  .next-lesson a { font-weight: 500; color: var(--ink); text-decoration: none; font-family: var(--serif); font-size: 1.2rem; display: flex; align-items: center; gap: 8px; }
+  .next-lesson a:hover { color: var(--accent); }
+
+  @media (max-width: 800px) {
+    .layout { grid-template-columns: 1fr; }
+    .sidebar { display: none; }
+    .main { padding: 2rem 1.5rem 4rem; }
+    h1 { font-size: 2rem; }
+    .compare-table .ct-header, .compare-table .ct-row { grid-template-columns: 1fr; }
+    .ct-cell:not(:last-child) { border-right: none; border-bottom: 1px solid var(--border); }
+    .ct-header div:not(:last-child) { border-right: none; border-bottom: 1px solid var(--border); }
+  }
+
+  /* Sidebar email signup */
+  .sidebar-signup {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--surface);
+  }
+  .sidebar-signup .ss-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .sidebar-signup .ss-text {
+    font-size: 12px;
+    color: var(--ink-2);
+    line-height: 1.55;
+    margin-bottom: 10px;
+  }
+  .sidebar-signup form { display: flex; flex-direction: column; gap: 6px; }
+  .sidebar-signup input[type="email"] {
+    font-family: var(--sans);
+    font-size: 12px;
+    padding: 7px 9px;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    background: var(--bg);
+    color: var(--ink);
+    outline: none;
+    width: 100%;
+    transition: border-color 0.15s;
+  }
+  .sidebar-signup input:focus { border-color: var(--accent); }
+  .sidebar-signup button {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    padding: 7px 9px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .sidebar-signup button:hover { background: #a84908; }
+</style>
+</head>
+<body>
+<div class="layout">
+
+  <aside class="sidebar">
+    <div class="sidebar-label">Tutorial</div>
+    <div class="sidebar-title">Spec Before You Ship</div>
+    <nav>
+      <a href="01-the-chaos-tax.html"><span class="num">01</span>The Chaos Tax</a>
+      <a href="02-install-and-init.html"><span class="num">02</span>Install &amp; Init</a>
+      <a href="03-your-first-change.html"><span class="num">03</span>Your First Change</a>
+      <a href="04-the-proposal.html"><span class="num">04</span>The Proposal</a>
+      <a href="05-the-specs-and-scenarios.html"><span class="num">05</span>Specs &amp; Scenarios</a>
+      <a href="06-the-design-doc.html"><span class="num">06</span>The Design Doc</a>
+      <a href="07-tasks.html"><span class="num">07</span>Tasks</a>
+      <a href="#" class="current"><span class="num">08</span>Fast-Forward</a>
+      <a href="09-implement.html"><span class="num">09</span>Implement</a>
+      <a href="10-mid-flight-edits.html"><span class="num">10</span>Mid-flight Edits</a>
+      <a href="11-final.html"><span class="num">11</span>Archive &amp; Compound</a>
+    </nav>
+    <div class="companion-box">
+      <div class="companion-label">Companion</div>
+      <p>Ask the companion to compare a specific section of the ff-generated draft against your hand-written version.</p>
+      <div class="skill-file">.claude/skills/bridgespec-companion/SKILL.md</div>
+    </div>
+
+    <div class="sidebar-signup">
+      <div class="ss-label">Stay Updated</div>
+      <p class="ss-text">New lessons and essays on shipping software with intention.</p>
+      <!-- Replace action="#" with your email provider endpoint -->
+      <form action="#" method="post">
+        <input type="email" name="email" placeholder="your@email.com" required>
+        <button type="submit">Subscribe →</button>
+      </form>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="breadcrumb">
+      <a href="#">Spec Before You Ship</a>
+      <span class="sep">/</span>
+      <span class="current">Lesson 08</span>
+    </div>
+
+    <div class="lesson-num">Lesson 08</div>
+    <h1>Fast-Forward</h1>
+    <p class="subtitle">The command you'll use on every real project from here on. You did it the slow way first so you know what good looks like. Now see what the AI produces — and exactly where to verify it.</p>
+
+    <div class="lesson">
+
+      <p>Lessons 4 through 7 took you through every artifact by hand. You wrote the proposal, the specs, reviewed the design doc, and evaluated the task list. That work had one purpose beyond building Bridgespec: teaching you the rubric. You now know what a weak problem statement looks like, what a scenario without an unhappy path costs you, what a decision entry without a rejected alternative fails to record.</p>
+
+      <p>With that rubric in your head, <code>/opsx:ff</code> becomes useful. Without it, <code>/opsx:ff</code> produces plausible-looking artifacts that you accept without knowing what they're missing.</p>
+
+      <h2>What /opsx:ff Actually Does</h2>
+
+      <p>Fast-forward runs <code>/opsx:continue</code> four times in sequence — proposal, specs, design, tasks — without stopping for human review between each one. The AI reads your <code>openspec/config.yaml</code> context and any description you provide, then generates all four artifacts in a single pass.</p>
+
+      <p>Try it on a new throwaway change so you can see the output clearly without touching your Bridgespec work:</p>
+
+      <div class="ai-exchange">
+        <div class="ae-row ae-you">
+          <div class="ae-label">you</div>
+          <div class="ae-text">/opsx:new add-dark-mode<br>
+/opsx:ff</div>
+        </div>
+        <div class="ae-row ae-ai">
+          <div class="ae-label">ai</div>
+          <div class="ae-text">Reading change: add-dark-mode<br>
+Generating all planning artifacts...<br>
+<br>
+✓ proposal.md — problem, scope, definition of done<br>
+✓ specs/theme/spec.md — 3 requirements, 6 scenarios<br>
+✓ design.md — context, decisions, trade-offs<br>
+✓ tasks.md — 11 tasks across 3 groups<br>
+<br>
+All planning artifacts complete.<br>
+Run /opsx:apply to begin implementation.</div>
+        </div>
+      </div>
+
+      <p>Open each file and read it against the rubrics from lessons 4–7. You'll find the ff output is genuinely good — better than most unguided prompting produces. You'll also find the gaps that are consistent and predictable.</p>
+
+      <h2>What ff Gets Right and What It Misses</h2>
+
+      <div class="compare-table">
+        <div class="ct-header">
+          <div>Artifact</div>
+          <div>ff gets right</div>
+          <div>ff commonly misses</div>
+        </div>
+        <div class="ct-row">
+          <div class="ct-cell ct-artifact">proposal.md</div>
+          <div class="ct-cell ct-ff">Problem statement, scope, a definition of done</div>
+          <div class="ct-cell ct-amber">Out-of-scope items are thin or missing. The AI doesn't know what you considered and rejected.</div>
+        </div>
+        <div class="ct-row">
+          <div class="ct-cell ct-artifact">specs/</div>
+          <div class="ct-cell ct-ff">Happy path scenarios, correct SHALL/MUST syntax, valid structure</div>
+          <div class="ct-cell ct-amber">Unhappy paths and edge cases are underspecified. The AI writes the world where things work.</div>
+        </div>
+        <div class="ct-row">
+          <div class="ct-cell ct-artifact">design.md</div>
+          <div class="ct-cell ct-ff">Architecture choices, component boundaries, function signatures</div>
+          <div class="ct-cell ct-amber">Decision entries lack rejected alternatives. The deferred section is empty or absent.</div>
+        </div>
+        <div class="ct-row">
+          <div class="ct-cell ct-artifact">tasks.md</div>
+          <div class="ct-cell ct-ff">Correct syntax, file references, reasonable grouping and order</div>
+          <div class="ct-cell ct-green">Usually solid. Task quality scales with design.md quality.</div>
+        </div>
+      </div>
+
+      <p>The pattern: the AI is excellent at describing the happy path and the chosen approach. It's weak at recording what it ruled out. That's not a flaw — it literally doesn't know what you considered and rejected unless you tell it. The fix is always the same: read the output, add the missing unhappy paths to specs, add the missing rejected alternatives to design decisions, populate the deferred section.</p>
+
+      <p><strong>A reviewed ff draft takes fifteen minutes. An unreviewed ff draft is just a faster way to write artifacts that miss the same things unguided prompting misses.</strong></p>
+
+      <h2>The Review Checklist</h2>
+
+      <p>After every <code>/opsx:ff</code> run, open the four files and check these four things before running <code>/opsx:apply</code>:</p>
+
+      <div class="code-block">
+        <div class="code-header">
+          <span class="code-filename">ff review checklist</span>
+        </div>
+        <pre><code><span class="t-check-open">- [ ]</span><span class="t-plain"> proposal.md: does the out-of-scope list have</span>
+<span class="t-plain">       at least three explicit items? If not, add them.</span>
+
+<span class="t-check-open">- [ ]</span><span class="t-plain"> specs/: does each requirement have at least one</span>
+<span class="t-plain">       unhappy path or edge case scenario? If not,</span>
+<span class="t-plain">       add one per requirement before moving on.</span>
+
+<span class="t-check-open">- [ ]</span><span class="t-plain"> design.md: does every decision entry name the</span>
+<span class="t-plain">       alternative that was rejected and why?</span>
+<span class="t-plain">       Fill in any that only describe the chosen approach.</span>
+
+<span class="t-check-open">- [ ]</span><span class="t-plain"> design.md: is the Deferred section populated?</span>
+<span class="t-plain">       Add anything you considered and explicitly left for later.</span></code></pre>
+      </div>
+
+      <p>That's it. Four checks. If all four pass, the artifacts are ready for <code>/opsx:apply</code>. If any fail, fix them in the file and save — no need to re-run <code>/opsx:ff</code>.</p>
+
+      <h2>When to Use Which Approach</h2>
+
+      <div class="when-grid">
+        <div class="when-card">
+          <div class="when-header">
+            <div class="when-title manual">Write manually</div>
+          </div>
+          <div class="when-body">
+            <div class="when-item">First time through a new feature domain — you need to think, not just review</div>
+            <div class="when-item">The problem is genuinely ambiguous and writing it out is how you clarify it</div>
+            <div class="when-item">Teaching someone else the SDD workflow for the first time</div>
+            <div class="when-item">Any change where the proposal's out-of-scope list is the hardest part to write</div>
+          </div>
+        </div>
+        <div class="when-card">
+          <div class="when-header">
+            <div class="when-title ff">Use /opsx:ff</div>
+          </div>
+          <div class="when-body">
+            <div class="when-item">Feature domain is familiar — you know what you're building and what to exclude</div>
+            <div class="when-item">Similar change to one you've done before — the AI can reuse context from the archive</div>
+            <div class="when-item">Small, well-scoped change — the artifacts are thin and the review takes five minutes</div>
+            <div class="when-item">You're on a deadline — ff plus the four-item review is faster than a vague chat</div>
+          </div>
+        </div>
+      </div>
+
+      <p>The rule is simpler than the table makes it look: <strong>use ff when you could write the artifacts yourself, and choose not to because it would be slower.</strong> Use the manual approach when you need the act of writing to figure out what you actually think.</p>
+
+      <div class="callout">
+        <div class="callout-label">Why this lesson exists</div>
+        <p>The README for OpenSpec leads with <code>/opsx:ff</code>. Most tutorials about spec-driven development lead with the fast path. This one doesn't — because fast-forward output without the rubric produces artifacts that look complete and aren't. You now have the rubric. The command is fast; the review is where the value is.</p>
+        <p>Delete the <code>add-dark-mode</code> change when you're done looking at it. It served its purpose.</p>
+      </div>
+
+      <h2>Clean Up</h2>
+
+      <div class="shell-block">
+        <pre><code><span class="t-shell-prompt">$ </span>rm -rf openspec/changes/add-dark-mode
+<span class="t-shell-prompt">$ </span>openspec status
+
+<span class="t-shell-out">Active changes:
+  bridgespec-scaffold    4/4 artifacts    2/17 tasks</span></code></pre>
+      </div>
+
+      <p>One active change. Four complete artifacts. Fifteen tasks waiting. Next lesson runs them.</p>
+
+      <div class="checkpoint">
+        <div class="checkpoint-label">End of lesson 8</div>
+        <ul>
+          <li>You've seen what /opsx:ff produces and where it's consistent strong and where it reliably falls short</li>
+          <li>You have a four-item review checklist that takes fifteen minutes and catches the gaps</li>
+          <li>You know the decision rule: ff when you could write it yourself and choose not to, manual when writing is how you think</li>
+          <li>The throwaway change is gone — bridgespec-scaffold is the only active change</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="next-lesson">
+      <div>
+        <div class="next-label">Previous</div>
+        <a href="07-tasks.html"><span class="arrow">←</span> Tasks</a>
+      </div>
+      <div style="text-align: right;">
+        <div class="next-label">Next lesson</div>
+        <a href="09-implement.html">Implement <span class="arrow">→</span></a>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span class="footer-copy">&copy; 2026 BridgeSpec &mdash; <span class="footer-attribution">Created by <a href="https://robertfauver.com">Robert Fauver</a></span></span>
+    <ul class="footer-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="01-the-chaos-tax.html">Start Learning</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <span class="footer-version">v0.0.1-alpha</span>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spec Before You Ship — A Tutorial in 11 Lessons</title>
+<meta name="description" content="A free, self-paced tutorial in 11 lessons. Stop writing vague prompts. Start shipping software that does what you meant.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&family=Geist:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css">
+<style>
+  /* ─── Shared column ──────────────────────────────── */
+  .col {
+    max-width: 740px;
+    margin: 0 auto;
+    padding: 0 2.5rem;
+  }
+
+  /* ─── Intro ──────────────────────────────────────── */
+  .intro {
+    padding: 6rem 0 5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+    margin-bottom: 3rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .eyebrow::after {
+    content: '';
+    display: block;
+    width: 2.5rem;
+    height: 1px;
+    background: var(--accent);
+    opacity: 0.5;
+  }
+
+  .intro-heading {
+    font-family: var(--serif);
+    font-weight: 400;
+    margin-bottom: 3.5rem;
+    line-height: 1;
+  }
+
+  .intro-heading .wd-spec {
+    display: block;
+    font-size: clamp(5.5rem, 18vw, 10rem);
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    line-height: 0.88;
+  }
+
+  .intro-heading .wd-rest {
+    display: block;
+    font-size: clamp(1.6rem, 5.5vw, 3.25rem);
+    font-style: italic;
+    color: var(--ink-3);
+    letter-spacing: -0.01em;
+    margin-top: 0.3em;
+    margin-left: 0.07em;
+  }
+
+  .intro-body {
+    font-size: 1.1rem;
+    color: var(--ink-2);
+    line-height: 1.78;
+    font-weight: 300;
+    max-width: 530px;
+    margin-bottom: 2.5rem;
+  }
+
+  .cta-row {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .cta-link {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.15rem;
+    color: var(--accent);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: gap 0.15s;
+  }
+
+  .cta-link:hover { gap: 0.8rem; }
+
+  .meta-tags {
+    display: flex;
+    gap: 0;
+    flex-wrap: wrap;
+  }
+
+  .meta-tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-3);
+    padding: 5px 11px;
+    border: 1px solid var(--border);
+    border-right: none;
+    background: var(--surface);
+    line-height: 1;
+  }
+
+  .meta-tags .meta-tag:first-child { border-radius: 4px 0 0 4px; }
+  .meta-tags .meta-tag:last-child  { border-right: 1px solid var(--border); border-radius: 0 4px 4px 0; }
+
+  /* ─── Curriculum ─────────────────────────────────── */
+  .curriculum { padding: 4.5rem 0 0; }
+
+  .section-rule {
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--ink-3);
+    margin-bottom: 2.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .section-rule::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .lesson-list { list-style: none; }
+
+  .lesson-item { border-top: 1px solid var(--border); }
+  .lesson-item:last-child { border-bottom: 1px solid var(--border); }
+
+  .lesson-link {
+    display: grid;
+    grid-template-columns: 38px 1fr 18px;
+    column-gap: 1.25rem;
+    align-items: center;
+    padding: 1.35rem 0.75rem;
+    margin: 0 -0.75rem;
+    text-decoration: none;
+    color: inherit;
+    border-radius: 4px;
+    transition: background 0.1s;
+  }
+
+  .lesson-link:hover { background: var(--surface); }
+
+  .l-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-3);
+    text-align: right;
+    flex-shrink: 0;
+    padding-top: 2px;
+  }
+
+  .l-title {
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    color: var(--ink);
+    line-height: 1.3;
+    margin-bottom: 3px;
+  }
+
+  .l-desc {
+    font-size: 13px;
+    color: var(--ink-3);
+    line-height: 1.5;
+    font-weight: 300;
+  }
+
+  .l-arrow {
+    color: var(--border-strong);
+    font-size: 0.85rem;
+    transition: color 0.1s, transform 0.15s;
+    justify-self: end;
+  }
+
+  .lesson-link:hover .l-arrow { color: var(--accent); transform: translateX(3px); }
+
+  /* ─── Pull quote ─────────────────────────────────── */
+  .pull {
+    margin: 5rem 0;
+    padding-left: 2rem;
+    border-left: 2px solid var(--border-strong);
+  }
+
+  .pull blockquote {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(1.3rem, 3vw, 1.8rem);
+    line-height: 1.55;
+    color: var(--ink-2);
+    margin-bottom: 1rem;
+  }
+
+  .pull cite {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-style: normal;
+    color: var(--ink-3);
+    letter-spacing: 0.04em;
+  }
+
+  /* ─── Email signup band (full-width) ─────────────── */
+  /* Replace form action="#" with your email provider endpoint */
+  .signup-band {
+    background: var(--dark);
+    padding: 5.5rem 2.5rem;
+    margin-top: 2rem;
+  }
+
+  .signup-inner {
+    max-width: 740px;
+    margin: 0 auto;
+  }
+
+  .signup-kicker {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: #4a4755;
+    margin-bottom: 1.75rem;
+  }
+
+  .signup-heading {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 5.5vw, 3.5rem);
+    font-weight: 400;
+    line-height: 1.12;
+    color: #f0ede8;
+    margin-bottom: 1.25rem;
+  }
+
+  .signup-heading em {
+    font-style: italic;
+    color: #e09468;
+  }
+
+  .signup-sub {
+    font-size: 14px;
+    color: #6b6870;
+    line-height: 1.7;
+    max-width: 420px;
+    margin-bottom: 2.75rem;
+    font-weight: 300;
+  }
+
+  .signup-form { display: flex; max-width: 500px; }
+
+  .signup-form input[type="email"] {
+    flex: 1;
+    font-family: var(--sans);
+    font-size: 15px;
+    font-weight: 300;
+    padding: 15px 18px;
+    background: #22202a;
+    border: 1px solid #332f3e;
+    border-right: none;
+    border-radius: 4px 0 0 4px;
+    color: #f0ede8;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+
+  .signup-form input::placeholder { color: #3d3a47; }
+  .signup-form input:focus { border-color: var(--accent); }
+
+  .signup-form button {
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    padding: 15px 22px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.15s;
+  }
+
+  .signup-form button:hover { background: #a84908; }
+
+  .signup-note {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: #3a3845;
+    margin-top: 1.25rem;
+  }
+
+  /* ─── Responsive ─────────────────────────────────── */
+  @media (max-width: 640px) {
+    .col { padding: 0 1.5rem; }
+    .intro { padding: 4rem 0 3.5rem; }
+    .intro-heading .wd-spec { font-size: clamp(4.5rem, 22vw, 10rem); }
+    .lesson-link { grid-template-columns: 30px 1fr; }
+    .l-arrow { display: none; }
+    .signup-band { padding: 4rem 1.5rem; }
+    .signup-form { flex-direction: column; }
+    .signup-form input[type="email"] {
+      border-right: 1px solid #332f3e;
+      border-bottom: none;
+      border-radius: 4px 4px 0 0;
+    }
+    .signup-form button { border-radius: 0 0 4px 4px; }
+    .cta-row { flex-direction: column; align-items: flex-start; gap: 1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="index.html" class="brand">Spec Before You Ship</a>
+  <nav>
+    <ul class="header-nav">
+      <li><a href="01-the-chaos-tax.html">Lessons</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<div class="col">
+
+  <!-- Intro -------------------------------------------------- -->
+  <section class="intro">
+    <div class="eyebrow">A BridgeSpec Tutorial</div>
+    <h1 class="intro-heading">
+      <span class="wd-spec">Spec</span>
+      <span class="wd-rest">Before You Ship.</span>
+    </h1>
+    <p class="intro-body">
+      Most AI-assisted development goes sideways not because the AI is bad—but because
+      you never told it exactly what you wanted. This tutorial teaches you to write specs,
+      scenarios, and design docs <em>before</em> you build, so the code you ship actually
+      matches what you meant.
+    </p>
+    <div class="cta-row">
+      <a href="01-the-chaos-tax.html" class="cta-link">
+        Start with Lesson 01 <span>→</span>
+      </a>
+      <div class="meta-tags">
+        <span class="meta-tag">11 lessons</span>
+        <span class="meta-tag">Self-paced</span>
+        <span class="meta-tag">Free</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Curriculum --------------------------------------------- -->
+  <section class="curriculum">
+    <div class="section-rule">Curriculum</div>
+    <ol class="lesson-list">
+
+      <li class="lesson-item">
+        <a href="01-the-chaos-tax.html" class="lesson-link">
+          <span class="l-num">01</span>
+          <div>
+            <div class="l-title">The Chaos Tax</div>
+            <div class="l-desc">Why vague prompts produce vague code—and how to break the cycle.</div>
+          </div>
+          <span class="l-arrow">→</span>
+        </a>
+      </li>
+
+      <li class="lesson-item">
+        <a href="02-install-and-init.html" class="lesson-link">
+          <span class="l-num">02</span>
+          <div>
+            <div class="l-title">Install &amp; Init</div>
+            <div class="l-desc">Get BridgeSpec set up and write your first spec file in minutes.</div>
+          </div>
+          <span class="l-arrow">→</span>
+        </a>
+      </li>
+
+      <li class="lesson-item">
+        <a href="03-your-first-change.html" class="lesson-link">
+          <span class="l-num">03</span>
+          <div>
+            <div class="l-title">Your First Change</div>
+            <div class="l-desc">Run a real spec-driven change from prompt to working, reviewable code.</div>
+          </div>
+          <span class="l-arrow">→</span>
+        </a>
+      </li>
+
+      <li class="lesson-item">
+        <a href="04-the-proposal.html" class="lesson-link">
+          <span class="l-num">04</span>
+          <div>
+            <div class="l-title">The Proposal</div>
+            <div class="l-desc">Let the AI draft the approach; you review, refine, and sign off.</div>
+          </div>
+          <span class="l-arrow">→</span>
+        </a>
+      </li>
+
+      <li class="lesson-item">
+        <a href="05-the-specs-and-scenarios.html" class="lesson-link">
+          <span class="l-num">05</span>
+          <div>
+            <div class="l-title">Specs &amp; Scenarios</div>
+            <div class="l-desc">Write acceptance criteria that leave no room for misinterpretation.</div>
+          </div>
+          <span class="l-arrow">→</span>
+        </a>
+      </li>
+
+      <li class="lesson-item">
+        <a href="06-the-design-doc.html" class="lesson-link">
+          <span class="l-num">06</span>
+          <div>
+            <div class="l-title">The Design Doc</div>
+            <div class="l-desc">Document the decisions before you make them—and refer back when things drift.</div>
+          </div>
+          <span class="l-arrow">→</span>
+        </a>
+      </li>
+
+      <li class="lesson-item">
+        <a href="07-tasks.html" class="lesson-link">
+          <span class="l-num">07</span>
+          <div>
+            <div class="l-title">Tasks</div>
+            <div class="l-desc">Break work into atomic, reviewable pieces the AI can execute without surprises.</div>
+          </div>
+          <span class="l-arrow">→</span>
+        </a>
+      </li>
+
+      <li class="lesson-item">
+        <a href="08-fast-forward.html" class="lesson-link">
+          <span class="l-num">08</span>
+          <div>
+            <div class="l-title">Fast-Forward</div>
+            <div class="l-desc">Approve work in bulk without losing the oversight that keeps things on track.</div>
+          </div>
+          <span class="l-arrow">→</span>
+        </a>
+      </li>
+
+      <li class="lesson-item">
+        <a href="09-implement.html" class="lesson-link">
+          <span class="l-num">09</span>
+          <div>
+            <div class="l-title">Implement</div>
+            <div class="l-desc">The spec-driven build loop in practice: from task to committed, working code.</div>
+          </div>
+          <span class="l-arrow">→</span>
+        </a>
+      </li>
+
+      <li class="lesson-item">
+        <a href="10-mid-flight-edits.html" class="lesson-link">
+          <span class="l-num">10</span>
+          <div>
+            <div class="l-title">Mid-flight Edits</div>
+            <div class="l-desc">Handle scope changes without derailing the build or losing what you've built.</div>
+          </div>
+          <span class="l-arrow">→</span>
+        </a>
+      </li>
+
+      <li class="lesson-item">
+        <a href="11-final.html" class="lesson-link">
+          <span class="l-num">11</span>
+          <div>
+            <div class="l-title">Archive &amp; Compound</div>
+            <div class="l-desc">Turn finished work into reusable patterns that make every future project faster.</div>
+          </div>
+          <span class="l-arrow">→</span>
+        </a>
+      </li>
+
+    </ol>
+  </section>
+
+  <!-- Pull quote --------------------------------------------- -->
+  <div class="pull">
+    <blockquote>
+      "The constraint isn't the AI. It's the clarity of what you asked for."
+    </blockquote>
+    <cite>— The premise behind every lesson in this tutorial</cite>
+  </div>
+
+</div><!-- /.col -->
+
+<!-- Email signup — replace action="#" with your provider endpoint -->
+<section class="signup-band">
+  <div class="signup-inner">
+    <div class="signup-kicker">Stay in the loop</div>
+    <h2 class="signup-heading">
+      New lessons.<br><em>In your inbox.</em>
+    </h2>
+    <p class="signup-sub">
+      Get notified when new lessons drop, plus occasional essays
+      on building software with intention.
+    </p>
+    <form class="signup-form" action="#" method="post">
+      <input type="email" name="email" placeholder="your@email.com" required autocomplete="email">
+      <button type="submit">Subscribe →</button>
+    </form>
+    <p class="signup-note">No spam. Unsubscribe anytime.</p>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span class="footer-copy">&copy; 2026 BridgeSpec &mdash; <span class="footer-attribution">Created by <a href="https://robertfauver.com">Robert Fauver</a></span></span>
+    <ul class="footer-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="01-the-chaos-tax.html">Start Learning</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <span class="footer-version">v0.0.1-alpha</span>
+  </div>
+</footer>
+
+</body>
+</html>
