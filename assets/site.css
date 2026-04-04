@@ -3,9 +3,9 @@
 
 /* ─── Design Tokens ──────────────────────────────────── */
 :root {
-  --sans: 'Geist', system-ui, sans-serif;
-  --serif: 'Instrument Serif', Georgia, serif;
-  --mono: 'JetBrains Mono', monospace;
+  --sans: 'Source Sans Pro', system-ui, sans-serif;
+  --serif: 'Source Serif 4', Georgia, serif;
+  --mono: 'Google Sans Code', monospace;
   --bg: #faf9f7;
   --surface: #f2f0eb;
   --border: #e3e0d8;
@@ -43,7 +43,7 @@
 }
 
 /* ─── Base ────────────────────────────────────────────── */
-html { font-size: 16px; background: var(--bg); color: var(--ink); }
+html { font-size: 20px; background: var(--bg); color: var(--ink); }
 body { font-family: var(--sans); font-weight: 300; line-height: 1; min-height: 100vh; }
 
 /* ─── Header ─────────────────────────────────────────── */
@@ -92,7 +92,7 @@ body { font-family: var(--sans); font-weight: 300; line-height: 1; min-height: 1
 }
 
 .footer-inner {
-  max-width: 740px;
+  max-width: 860px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
