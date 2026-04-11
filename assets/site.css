@@ -16,17 +16,17 @@
   --accent: #c4580a;
   --accent-bg: #fdf1e8;
   --dark: #18171a;
-  /* Code block tokens */
-  --code-bg: #18171a;
-  --code-fg: #e8e6e3;
-  --code-comment: #6b6870;
-  --code-keyword: #c792ea;
-  --code-string: #c3e88d;
-  --code-type: #82aaff;
-  --code-number: #f78c6c;
-  --code-prop: #89ddff;
-  --code-fn: #82aaff;
-  --code-op: #89ddff;
+  /* Code block tokens — Solarized Light */
+  --code-bg: #fdf6e3;
+  --code-fg: #657b83;
+  --code-comment: #93a1a1;
+  --code-keyword: #859900;
+  --code-string: #2aa198;
+  --code-type: #268bd2;
+  --code-number: #cb4b16;
+  --code-prop: #268bd2;
+  --code-fn: #268bd2;
+  --code-op: #657b83;
   /* Callout tokens */
   --warn-bg: #fdf6e3;
   --warn-border: #e8d080;
@@ -133,6 +133,46 @@ body { font-family: var(--sans); font-weight: 300; line-height: 1; min-height: 1
 }
 
 .footer-attribution a:hover { color: var(--ink); }
+
+/* ─── Mobile lesson nav bar ──────────────────────────── */
+.mob-nav {
+  display: none;
+}
+
+@media (max-width: 960px) {
+  .mob-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: rgba(250, 249, 247, 0.97);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+    padding: 0.75rem 1.5rem;
+  }
+
+  .mob-nav-arrow {
+    font-family: var(--mono);
+    font-size: 1rem;
+    color: var(--ink-2);
+    text-decoration: none;
+    line-height: 1;
+    transition: color 0.12s;
+  }
+
+  .mob-nav-arrow:hover { color: var(--accent); }
+  .mob-nav-arrow.hidden { visibility: hidden; }
+
+  .mob-nav-counter {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-3);
+    letter-spacing: 0.06em;
+  }
+}
 
 /* ─── Responsive ─────────────────────────────────────── */
 @media (max-width: 640px) {

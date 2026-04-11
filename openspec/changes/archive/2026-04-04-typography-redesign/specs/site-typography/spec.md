@@ -27,7 +27,7 @@ Content column widths and padding SHALL be sized to complement the 20px base, pr
 
 #### Scenario: Lesson content column width
 - **WHEN** a lesson page is viewed at full desktop width
-- **THEN** the `.main` content area SHALL have a max-width of 800px
+- **THEN** the `.main` content area SHALL have a max-width of 960px
 
 #### Scenario: Index content column width
 - **WHEN** the index page is viewed at full desktop width

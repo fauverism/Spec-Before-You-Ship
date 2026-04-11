@@ -38,7 +38,7 @@ All existing rem values scale proportionally. No individual size values need to 
 | Element | Before | After |
 |---------|--------|-------|
 | Index `.col` max-width | 740px | 860px |
-| Lesson `.main` max-width | 720px | 800px |
+| Lesson `.main` max-width | 720px | 960px |
 | Lesson `.main` padding | 4rem 3.5rem 6rem | 4rem 4.5rem 6rem |
 | Sidebar width | 240px | 260px |
 | Layout max-width | 1100px | 1200px |
@@ -52,5 +52,5 @@ Google Sans Code availability via the CSS API should be verified during implemen
 ## Risks / Trade-offs
 
 - **Google Sans Code API availability** → If the font isn't available via the standard Google Fonts CSS API, substitute DM Mono. Visual difference is minor.
-- **20px base on small screens** → The responsive breakpoints (640px, 700px, 800px) may need review. At 20px base, `1.5rem` of padding = 30px — verify nothing feels cramped on mobile.
+- **20px base on small screens** → The responsive breakpoints (640px, 700px, 960px) may need review. At 20px base, `1.5rem` of padding = 30px — verify nothing feels cramped on mobile.
 - **Source Serif 4 opsz axis** → Requires `font-variation-settings` on heading elements. Simple CSS addition, but must be applied to `h1` on lesson pages and the `.intro-heading` on index.

@@ -8,77 +8,34 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Code:wght@400;500&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/site.css">
+<link rel="stylesheet" href="../assets/lesson.css">
 <style>
-  .layout { display: grid; grid-template-columns: 260px 1fr; min-height: 100vh; max-width: 1200px; margin: 0 auto; }
-
-  .sidebar { border-right: 1px solid var(--border); padding: 2.5rem 1.5rem; position: sticky; top: 0; height: 100vh; overflow-y: auto; }
-  .sidebar-label { font-family: var(--mono); font-size: 10px; font-weight: 500; color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem; }
-  .sidebar-title { font-family: var(--serif); font-size: 1.05rem; line-height: 1.4; color: var(--ink); margin-bottom: 1.5rem; }
-  .sidebar nav { margin-bottom: 2rem; }
-  .sidebar nav a { display: block; font-size: 13px; font-weight: 300; color: var(--ink-3); text-decoration: none; padding: 5px 0; line-height: 1.4; }
-  .sidebar nav a:hover { color: var(--ink); }
-  .sidebar nav a.current { color: var(--accent); font-weight: 500; }
-  .sidebar nav a .num { font-family: var(--mono); font-size: 10px; color: var(--ink-3); margin-right: 6px; }
-  .sidebar nav a.current .num { color: var(--accent); opacity: 0.7; }
-  .companion-box { border: 1px solid var(--border); border-radius: 6px; padding: 1rem; background: var(--surface); }
-  .companion-box .companion-label { font-family: var(--mono); font-size: 10px; color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
-  .companion-box p { font-size: 12px; color: var(--ink-2); line-height: 1.6; margin-bottom: 8px; }
-  .companion-box .skill-file { font-family: var(--mono); font-size: 10px; color: var(--ink-3); }
-
-  .main { padding: 4rem 4.5rem 6rem; max-width: 800px; }
-  .breadcrumb { font-family: var(--mono); font-size: 11px; color: var(--ink-3); margin-bottom: 2.5rem; display: flex; align-items: center; gap: 6px; }
-  .breadcrumb a { color: var(--ink-3); text-decoration: none; }
-  .breadcrumb a:hover { color: var(--ink); }
-  .breadcrumb .sep { opacity: 0.4; }
-
-  .lesson-num { font-family: var(--mono); font-size: 11px; color: var(--ink-3); margin-bottom: 0.5rem; }
-  h1 { font-family: var(--serif); font-size: 2.6rem; font-weight: 400; line-height: 1.1; margin-bottom: 0.75rem; letter-spacing: -0.01em; font-variation-settings: 'opsz' 40; }
-  .subtitle { font-size: 1.05rem; color: var(--ink-2); font-weight: 300; line-height: 1.6; margin-bottom: 2.5rem; padding-bottom: 2.5rem; border-bottom: 1px solid var(--border); }
-
-  .lesson p { font-size: 1rem; line-height: 1.75; color: var(--ink-2); margin-bottom: 1.25rem; font-weight: 300; }
-  .lesson p strong { color: var(--ink); font-weight: 500; }
-  .lesson h2 { font-family: var(--sans); font-size: 1.05rem; font-weight: 500; color: var(--ink); margin: 2.5rem 0 0.75rem; padding-top: 2.5rem; border-top: 1px solid var(--border); letter-spacing: -0.01em; }
-  .lesson h2:first-of-type { margin-top: 1.5rem; padding-top: 1.5rem; }
-  .lesson code:not(.block) { font-family: var(--mono); font-size: 0.82em; background: var(--surface); border: 1px solid var(--border); border-radius: 3px; padding: 1px 5px; color: var(--ink); }
-
-  .code-block { margin: 1.5rem 0; border-radius: 8px; overflow: hidden; border: 1px solid #2a2830; }
-  .code-header { background: #22202a; padding: 8px 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-  .code-filename { font-family: var(--mono); font-size: 11px; color: #807d88; }
-  .code-lang { font-family: var(--mono); font-size: 10px; color: #504d5a; text-transform: uppercase; letter-spacing: 0.06em; }
-  .code-verdict { font-family: var(--mono); font-size: 10px; font-weight: 500; padding: 2px 8px; border-radius: 3px; }
-  .verdict-bad { background: var(--red-bg); color: #c05050; border: 1px solid var(--red-border); }
-  .verdict-good { background: var(--green-bg); color: #6a9f6a; border: 1px solid var(--green-border); }
-
-  pre { background: var(--code-bg); padding: 1.25rem 1.5rem; overflow-x: auto; margin: 0; line-height: 1.7; }
-  pre code { font-family: var(--mono); font-size: 13px; color: var(--code-fg); display: block; }
-
+  /* Lesson 06 token colors */
   .t-comment { color: var(--code-comment); font-style: italic; }
   .t-h1 { color: var(--code-type); font-weight: 500; }
   .t-h2 { color: var(--code-type); }
   .t-h3 { color: #c792ea; }
   .t-plain { color: var(--code-fg); }
-  .t-dim { color: #504d5a; }
+  .t-dim { color: #93a1a1; }
   .t-string { color: var(--code-string); }
   .t-kw { color: var(--code-string); font-weight: 500; }
   .t-bad { color: #c05050; }
-  .t-good { color: #6a9f6a; }
-  .t-you { color: #89ddff; }
-  .t-ai { color: #c3e88d; }
-
-  .shell-block { margin: 1.5rem 0; border-radius: 8px; overflow: hidden; border: 1px solid #2a2830; background: var(--code-bg); }
-  .shell-block pre { padding: 1rem 1.25rem; }
+  .t-good { color: #859900; }
+  .t-you { color: #268bd2; }
+  .t-ai { color: #2aa198; }
   .t-shell-prompt { color: var(--code-comment); user-select: none; }
-  .t-shell-out { color: #6a9f6a; }
-  .t-shell-dim { color: #504d5a; }
+  .t-shell-out { color: #859900; }
+  .t-shell-dim { color: #93a1a1; }
 
-  .callout { border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 6px; padding: 1rem 1.25rem; background: var(--accent-bg); margin: 1.5rem 0; }
-  .callout .callout-label { font-family: var(--mono); font-size: 10px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); margin-bottom: 6px; }
-  .callout p { font-size: 14px; color: var(--ink-2); margin: 0 !important; line-height: 1.65; }
-  .callout p + p { margin-top: 0.5rem !important; }
+  /* Lesson 06 code block extras */
+  .code-header { gap: 12px; }
+  .code-verdict { font-family: var(--mono); font-size: 10px; font-weight: 500; padding: 2px 8px; border-radius: 3px; }
+  .verdict-bad { background: var(--red-bg); color: #c05050; border: 1px solid var(--red-border); }
+  .verdict-good { background: var(--green-bg); color: #859900; border: 1px solid var(--green-border); }
 
-  .warn { border: 1px solid var(--warn-border); border-radius: 6px; padding: 1rem 1.25rem; background: var(--warn-bg); margin: 1.5rem 0; }
-  .warn .warn-label { font-family: var(--mono); font-size: 10px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; color: var(--amber); margin-bottom: 6px; }
-  .warn p { font-size: 14px; color: var(--ink-2); margin: 0 !important; line-height: 1.65; }
+  /* Lesson 06 pre override — padded */
+  pre { padding: 1.25rem 1.5rem; }
+  .shell-block pre { padding: 0; }
 
   /* Section anatomy */
   .anatomy { margin: 1.5rem 0; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
@@ -93,100 +50,31 @@
 
   /* Decision quality check */
   .decision-check { margin: 1.5rem 0; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  .dc-block { border-radius: 8px; overflow: hidden; border: 1px solid #2a2830; }
-  .dc-header { background: #22202a; padding: 8px 12px; display: flex; align-items: center; justify-content: space-between; }
-  .dc-label { font-family: var(--mono); font-size: 10px; color: #807d88; }
+  .dc-block { border-radius: 8px; overflow: hidden; border: 1px solid #eee8d5; }
+  .dc-header { background: #eee8d5; padding: 8px 12px; display: flex; align-items: center; justify-content: space-between; }
+  .dc-label { font-family: var(--mono); font-size: 10px; color: #93a1a1; }
   .dc-verdict { font-family: var(--mono); font-size: 10px; font-weight: 500; padding: 2px 8px; border-radius: 3px; }
   .dc-block pre { padding: 0.9rem 1rem; font-size: 12.5px; line-height: 1.65; }
   @media (max-width: 640px) { .decision-check { grid-template-columns: 1fr; } }
 
   /* AI exchange */
-  .ai-exchange { margin: 1.5rem 0; border: 1px solid #2a2830; border-radius: 8px; overflow: hidden; }
-  .ae-row { padding: 0.9rem 1.25rem; border-bottom: 1px solid #2a2830; }
+  .ai-exchange { margin: 1.5rem 0; border: 1px solid #eee8d5; border-radius: 8px; overflow: hidden; }
+  .ae-row { padding: 0.9rem 1.25rem; border-bottom: 1px solid #eee8d5; }
   .ae-row:last-child { border-bottom: none; }
-  .ae-label { font-family: var(--mono); font-size: 10px; color: #504d5a; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 5px; }
+  .ae-label { font-family: var(--mono); font-size: 10px; color: #93a1a1; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 5px; }
   .ae-text { font-family: var(--mono); font-size: 13px; line-height: 1.7; }
-  .ae-you .ae-text { color: #89ddff; }
-  .ae-ai .ae-text { color: #c3e88d; }
+  .ae-you .ae-text { color: #268bd2; }
+  .ae-ai .ae-text { color: #2aa198; }
   .ae-ai { background: #1c1b22; }
-
-  .file-tree { margin: 1.5rem 0; border-radius: 8px; overflow: hidden; border: 1px solid #2a2830; }
-  .file-tree pre { background: var(--code-bg); padding: 1.25rem 1.5rem; }
-  .file-tree code { font-family: var(--mono); font-size: 13px; color: var(--code-fg); display: block; line-height: 1.9; }
-  .ft-dir { color: var(--code-type); }
-  .ft-new { color: var(--code-string); }
-  .ft-dim { color: #504d5a; }
-
-  .checkpoint { border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem 1.5rem; background: var(--surface); margin: 2rem 0; }
-  .checkpoint .checkpoint-label { font-family: var(--mono); font-size: 10px; color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.75rem; }
-  .checkpoint ul { list-style: none; display: flex; flex-direction: column; gap: 4px; }
-  .checkpoint li { font-size: 13px; color: var(--ink-2); display: flex; align-items: flex-start; gap: 8px; line-height: 1.5; }
-  .checkpoint li::before { content: '✓'; color: var(--green); font-family: var(--mono); font-size: 12px; flex-shrink: 0; margin-top: 1px; }
-
-  .next-lesson { margin-top: 3.5rem; padding-top: 2rem; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
-  .next-lesson .next-label { font-family: var(--mono); font-size: 10px; color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
-  .next-lesson a { font-weight: 500; color: var(--ink); text-decoration: none; font-family: var(--serif); font-size: 1.2rem; display: flex; align-items: center; gap: 8px; }
-  .next-lesson a:hover { color: var(--accent); }
-
-  @media (max-width: 800px) {
-    .layout { grid-template-columns: 1fr; }
-    .sidebar { display: none; }
-    .main { padding: 2rem 1.5rem 4rem; }
-    h1 { font-size: 2rem; }
-  }
-
-  /* Sidebar email signup */
-  .sidebar-signup {
-    margin-top: 1.5rem;
-    padding: 1rem;
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    background: var(--surface);
-  }
-  .sidebar-signup .ss-label {
-    font-family: var(--mono);
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--accent);
-    margin-bottom: 8px;
-  }
-  .sidebar-signup .ss-text {
-    font-size: 12px;
-    color: var(--ink-2);
-    line-height: 1.55;
-    margin-bottom: 10px;
-  }
-  .sidebar-signup form { display: flex; flex-direction: column; gap: 6px; }
-  .sidebar-signup input[type="email"] {
-    font-family: var(--sans);
-    font-size: 12px;
-    padding: 7px 9px;
-    border: 1px solid var(--border);
-    border-radius: 3px;
-    background: var(--bg);
-    color: var(--ink);
-    outline: none;
-    width: 100%;
-    transition: border-color 0.15s;
-  }
-  .sidebar-signup input:focus { border-color: var(--accent); }
-  .sidebar-signup button {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.04em;
-    padding: 7px 9px;
-    background: var(--accent);
-    color: #fff;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-    transition: background 0.15s;
-  }
-  .sidebar-signup button:hover { background: #a84908; }
 </style>
 </head>
 <body>
+<div class="mob-nav">
+  <a href="05-the-specs-and-scenarios.html" class="mob-nav-arrow">←</a>
+  <span class="mob-nav-counter">06 / 11</span>
+  <a href="07-tasks.html" class="mob-nav-arrow">→</a>
+</div>
+
 <div class="layout">
 
   <aside class="sidebar">
@@ -205,12 +93,6 @@
       <a href="10-mid-flight-edits.html"><span class="num">10</span>Mid-flight Edits</a>
       <a href="11-final.html"><span class="num">11</span>Archive &amp; Compound</a>
     </nav>
-    <div class="companion-box">
-      <div class="companion-label">Companion</div>
-      <p>Ask the companion to check whether each decision entry records the alternative you considered and why you rejected it.</p>
-      <div class="skill-file">.claude/skills/bridgespec-companion/SKILL.md</div>
-    </div>
-
     <div class="sidebar-signup">
       <div class="ss-label">Stay Updated</div>
       <p class="ss-text">New lessons and essays on shipping software with intention.</p>

@@ -8,77 +8,39 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Code:wght@400;500&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/site.css">
+<link rel="stylesheet" href="../assets/lesson.css">
 <style>
-  .layout { display: grid; grid-template-columns: 260px 1fr; min-height: 100vh; max-width: 1200px; margin: 0 auto; }
-
-  .sidebar { border-right: 1px solid var(--border); padding: 2.5rem 1.5rem; position: sticky; top: 0; height: 100vh; overflow-y: auto; }
-  .sidebar-label { font-family: var(--mono); font-size: 10px; font-weight: 500; color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem; }
-  .sidebar-title { font-family: var(--serif); font-size: 1.05rem; line-height: 1.4; color: var(--ink); margin-bottom: 1.5rem; }
-  .sidebar nav { margin-bottom: 2rem; }
-  .sidebar nav a { display: block; font-size: 13px; font-weight: 300; color: var(--ink-3); text-decoration: none; padding: 5px 0; line-height: 1.4; }
-  .sidebar nav a:hover { color: var(--ink); }
-  .sidebar nav a.current { color: var(--accent); font-weight: 500; }
-  .sidebar nav a .num { font-family: var(--mono); font-size: 10px; color: var(--ink-3); margin-right: 6px; }
-  .sidebar nav a.current .num { color: var(--accent); opacity: 0.7; }
-  .companion-box { border: 1px solid var(--border); border-radius: 6px; padding: 1rem; background: var(--surface); }
-  .companion-box .companion-label { font-family: var(--mono); font-size: 10px; color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
-  .companion-box p { font-size: 12px; color: var(--ink-2); line-height: 1.6; margin-bottom: 8px; }
-  .companion-box .skill-file { font-family: var(--mono); font-size: 10px; color: var(--ink-3); }
-
-  .main { padding: 4rem 4.5rem 6rem; max-width: 800px; }
-  .breadcrumb { font-family: var(--mono); font-size: 11px; color: var(--ink-3); margin-bottom: 2.5rem; display: flex; align-items: center; gap: 6px; }
-  .breadcrumb a { color: var(--ink-3); text-decoration: none; }
-  .breadcrumb a:hover { color: var(--ink); }
-  .breadcrumb .sep { opacity: 0.4; }
-
-  .lesson-num { font-family: var(--mono); font-size: 11px; color: var(--ink-3); margin-bottom: 0.5rem; }
-  h1 { font-family: var(--serif); font-size: 2.6rem; font-weight: 400; line-height: 1.1; margin-bottom: 0.75rem; letter-spacing: -0.01em; font-variation-settings: 'opsz' 40; }
-  .subtitle { font-size: 1.05rem; color: var(--ink-2); font-weight: 300; line-height: 1.6; margin-bottom: 2.5rem; padding-bottom: 2.5rem; border-bottom: 1px solid var(--border); }
-
-  .lesson p { font-size: 1rem; line-height: 1.75; color: var(--ink-2); margin-bottom: 1.25rem; font-weight: 300; }
-  .lesson p strong { color: var(--ink); font-weight: 500; }
-  .lesson h2 { font-family: var(--sans); font-size: 1.05rem; font-weight: 500; color: var(--ink); margin: 2.5rem 0 0.75rem; padding-top: 2.5rem; border-top: 1px solid var(--border); letter-spacing: -0.01em; }
-  .lesson h2:first-of-type { margin-top: 1.5rem; padding-top: 1.5rem; }
-  .lesson code:not(.block) { font-family: var(--mono); font-size: 0.82em; background: var(--surface); border: 1px solid var(--border); border-radius: 3px; padding: 1px 5px; color: var(--ink); }
-
-  .code-block { margin: 1.5rem 0; border-radius: 8px; overflow: hidden; border: 1px solid #2a2830; }
-  .code-header { background: #22202a; padding: 8px 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-  .code-filename { font-family: var(--mono); font-size: 11px; color: #807d88; }
-  .code-lang { font-family: var(--mono); font-size: 10px; color: #504d5a; text-transform: uppercase; letter-spacing: 0.06em; }
-  pre { background: var(--code-bg); padding: 1.25rem 1.5rem; overflow-x: auto; margin: 0; line-height: 1.7; }
-  pre code { font-family: var(--mono); font-size: 13px; color: var(--code-fg); display: block; }
-
+  /* Lesson 10 token colors */
   .t-comment { color: var(--code-comment); font-style: italic; }
   .t-h2 { color: var(--code-type); }
   .t-h3 { color: #c792ea; }
-  .t-h4 { color: #89ddff; }
+  .t-h4 { color: #268bd2; }
   .t-kw { color: var(--code-string); font-weight: 500; }
   .t-plain { color: var(--code-fg); }
-  .t-dim { color: #504d5a; }
+  .t-dim { color: #93a1a1; }
   .t-str { color: var(--code-string); }
-  .t-good { color: #6a9f6a; }
+  .t-good { color: #859900; }
   .t-warn { color: #c9a84c; }
-  .t-strike { color: #504d5a; text-decoration: line-through; }
+  .t-strike { color: #93a1a1; text-decoration: line-through; }
   .t-new { color: var(--code-string); }
-  .t-check-done { color: #6a9f6a; }
-  .t-check-open { color: #504d5a; }
-
-  .shell-block { margin: 1.5rem 0; border-radius: 8px; overflow: hidden; border: 1px solid #2a2830; background: var(--code-bg); }
-  .shell-block pre { padding: 1rem 1.25rem; }
+  .t-check-done { color: #859900; }
+  .t-check-open { color: #93a1a1; }
   .t-shell-prompt { color: var(--code-comment); user-select: none; }
-  .t-shell-out { color: #6a9f6a; }
+  .t-shell-out { color: #859900; }
   .t-shell-warn { color: #c9a84c; }
 
-  .callout { border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 6px; padding: 1rem 1.25rem; background: var(--accent-bg); margin: 1.5rem 0; }
-  .callout .callout-label { font-family: var(--mono); font-size: 10px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); margin-bottom: 6px; }
-  .callout p { font-size: 14px; color: var(--ink-2); margin: 0 !important; line-height: 1.65; }
-  .callout p + p { margin-top: 0.5rem !important; }
+  /* Lesson 10 code block extras */
+  .code-header { gap: 12px; }
 
-  .warn { border: 1px solid var(--warn-border); border-radius: 6px; padding: 1rem 1.25rem; background: var(--warn-bg); margin: 1.5rem 0; }
-  .warn .warn-label { font-family: var(--mono); font-size: 10px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; color: var(--amber); margin-bottom: 6px; }
-  .warn p { font-size: 14px; color: var(--ink-2); margin: 0 !important; line-height: 1.65; }
+  /* Lesson 10 pre override — padded */
+  pre { padding: 1.25rem 1.5rem; }
+  .shell-block pre { padding: 0; }
 
-  /* type cards — the three situations */
+  /* Lesson 10 file tree extras */
+  .ft-done { color: #859900; }
+  .ft-changed { color: #c9a84c; }
+
+  /* Type cards */
   .type-cards { margin: 1.5rem 0; display: flex; flex-direction: column; gap: 12px; }
   .type-card { border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
   .tc-header { display: flex; align-items: center; gap: 10px; padding: 10px 16px; border-bottom: 1px solid var(--border); background: var(--surface); }
@@ -92,17 +54,17 @@
   .tc-rule { font-size: 14px; color: var(--ink-2); line-height: 1.65; }
   .tc-rule strong { color: var(--ink); font-weight: 500; }
 
-  /* step flows */
-  .step-flow { margin: 1rem 0; display: flex; flex-direction: column; gap: 0; border: 1px solid #2a2830; border-radius: 8px; overflow: hidden; }
-  .sf-row { display: flex; align-items: flex-start; gap: 0; border-bottom: 1px solid #2a2830; }
+  /* Step flows */
+  .step-flow { margin: 1rem 0; display: flex; flex-direction: column; gap: 0; border: 1px solid #eee8d5; border-radius: 8px; overflow: hidden; }
+  .sf-row { display: flex; align-items: flex-start; gap: 0; border-bottom: 1px solid #eee8d5; }
   .sf-row:last-child { border-bottom: none; }
-  .sf-num { width: 32px; flex-shrink: 0; background: #22202a; display: flex; align-items: flex-start; justify-content: center; padding-top: 10px; font-family: var(--mono); font-size: 11px; color: #504d5a; border-right: 1px solid #2a2830; }
+  .sf-num { width: 32px; flex-shrink: 0; background: #eee8d5; display: flex; align-items: flex-start; justify-content: center; padding-top: 10px; font-family: var(--mono); font-size: 11px; color: #93a1a1; border-right: 1px solid #eee8d5; }
   .sf-body { flex: 1; padding: 0.8rem 1rem; background: var(--code-bg); }
   .sf-action { font-family: var(--mono); font-size: 12px; font-weight: 500; margin-bottom: 3px; }
-  .sf-detail { font-size: 13px; color: #807d88; line-height: 1.55; }
+  .sf-detail { font-size: 13px; color: #93a1a1; line-height: 1.55; }
   .sf-cmd { font-family: var(--mono); font-size: 12px; color: var(--code-prop); margin-top: 4px; }
 
-  /* sync vs archive table */
+  /* Compare table */
   .compare-table { margin: 1.5rem 0; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
   .ct-head { display: grid; grid-template-columns: 1fr 1fr 1fr; background: var(--surface); border-bottom: 1px solid var(--border); }
   .ct-head div { padding: 8px 14px; font-family: var(--mono); font-size: 11px; font-weight: 500; color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.06em; }
@@ -112,91 +74,24 @@
   .ct-cell { padding: 9px 14px; font-size: 13px; line-height: 1.5; color: var(--ink-2); }
   .ct-cell:not(:last-child) { border-right: 1px solid var(--border); }
   .ct-feat { font-family: var(--mono); font-size: 12px; color: var(--ink); }
-  .ct-yes { color: #6a9f6a; font-family: var(--mono); font-size: 12px; }
-  .ct-no { color: #504d5a; font-family: var(--mono); font-size: 12px; }
+  .ct-yes { color: #859900; font-family: var(--mono); font-size: 12px; }
+  .ct-no { color: #93a1a1; font-family: var(--mono); font-size: 12px; }
 
-  .file-tree { margin: 1.5rem 0; border-radius: 8px; overflow: hidden; border: 1px solid #2a2830; }
-  .file-tree pre { background: var(--code-bg); padding: 1.25rem 1.5rem; }
-  .file-tree code { font-family: var(--mono); font-size: 13px; color: var(--code-fg); display: block; line-height: 1.9; }
-  .ft-dir { color: var(--code-type); }
-  .ft-new { color: var(--code-string); }
-  .ft-done { color: #6a9f6a; }
-  .ft-dim { color: #504d5a; }
-  .ft-changed { color: #c9a84c; }
-
-  .checkpoint { border: 1px solid var(--border); border-radius: 8px; padding: 1.25rem 1.5rem; background: var(--surface); margin: 2rem 0; }
-  .checkpoint .checkpoint-label { font-family: var(--mono); font-size: 10px; color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.75rem; }
-  .checkpoint ul { list-style: none; display: flex; flex-direction: column; gap: 4px; }
-  .checkpoint li { font-size: 13px; color: var(--ink-2); display: flex; align-items: flex-start; gap: 8px; line-height: 1.5; }
-  .checkpoint li::before { content: '✓'; color: var(--green); font-family: var(--mono); font-size: 12px; flex-shrink: 0; margin-top: 1px; }
-
-  .next-lesson { margin-top: 3.5rem; padding-top: 2rem; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
-  .next-lesson .next-label { font-family: var(--mono); font-size: 10px; color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
-  .next-lesson a { font-weight: 500; color: var(--ink); text-decoration: none; font-family: var(--serif); font-size: 1.2rem; display: flex; align-items: center; gap: 8px; }
-  .next-lesson a:hover { color: var(--accent); }
-
-  @media (max-width: 800px) {
-    .layout { grid-template-columns: 1fr; }
-    .sidebar { display: none; }
-    .main { padding: 2rem 1.5rem 4rem; }
-    h1 { font-size: 2rem; }
+  /* Compare table responsive */
+  @media (max-width: 960px) {
     .ct-head, .ct-row { grid-template-columns: 1fr; }
     .ct-cell:not(:last-child) { border-right: none; border-bottom: 1px solid var(--border); }
     .ct-head div:not(:last-child) { border-right: none; border-bottom: 1px solid var(--border); }
   }
-
-  /* Sidebar email signup */
-  .sidebar-signup {
-    margin-top: 1.5rem;
-    padding: 1rem;
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    background: var(--surface);
-  }
-  .sidebar-signup .ss-label {
-    font-family: var(--mono);
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--accent);
-    margin-bottom: 8px;
-  }
-  .sidebar-signup .ss-text {
-    font-size: 12px;
-    color: var(--ink-2);
-    line-height: 1.55;
-    margin-bottom: 10px;
-  }
-  .sidebar-signup form { display: flex; flex-direction: column; gap: 6px; }
-  .sidebar-signup input[type="email"] {
-    font-family: var(--sans);
-    font-size: 12px;
-    padding: 7px 9px;
-    border: 1px solid var(--border);
-    border-radius: 3px;
-    background: var(--bg);
-    color: var(--ink);
-    outline: none;
-    width: 100%;
-    transition: border-color 0.15s;
-  }
-  .sidebar-signup input:focus { border-color: var(--accent); }
-  .sidebar-signup button {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.04em;
-    padding: 7px 9px;
-    background: var(--accent);
-    color: #fff;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-    transition: background 0.15s;
-  }
-  .sidebar-signup button:hover { background: #a84908; }
 </style>
 </head>
 <body>
+<div class="mob-nav">
+  <a href="09-implement.html" class="mob-nav-arrow">←</a>
+  <span class="mob-nav-counter">10 / 11</span>
+  <a href="11-final.html" class="mob-nav-arrow">→</a>
+</div>
+
 <div class="layout">
 
   <aside class="sidebar">
@@ -215,12 +110,6 @@
       <a href="#" class="current"><span class="num">10</span>Mid-flight Edits</a>
       <a href="11-final.html"><span class="num">11</span>Archive &amp; Compound</a>
     </nav>
-    <div class="companion-box">
-      <div class="companion-label">Companion</div>
-      <p>If something unexpected surfaced during implementation, ask the companion whether it's a correction, reduction, or expansion — then follow the right response for each.</p>
-      <div class="skill-file">.claude/skills/bridgespec-companion/SKILL.md</div>
-    </div>
-
     <div class="sidebar-signup">
       <div class="ss-label">Stay Updated</div>
       <p class="ss-text">New lessons and essays on shipping software with intention.</p>
@@ -301,21 +190,21 @@
         <div class="sf-row">
           <div class="sf-num">2</div>
           <div class="sf-body">
-            <div class="sf-action" style="color:#89ddff;">Edit the spec</div>
+            <div class="sf-action" style="color:#268bd2;">Edit the spec</div>
             <div class="sf-detail">Open <code>specs/contract-editor/spec.md</code>. Find the scenario that described the old behavior. Replace it with the corrected scenario — specifically: isMissing clears only when description is non-empty.</div>
           </div>
         </div>
         <div class="sf-row">
           <div class="sf-num">3</div>
           <div class="sf-body">
-            <div class="sf-action" style="color:#89ddff;">Uncheck the affected task</div>
+            <div class="sf-action" style="color:#268bd2;">Uncheck the affected task</div>
             <div class="sf-detail">If task 3.4 was already checked, mark it <code>[ ]</code> again. The implementation based on the old spec needs to be redone. If it wasn't checked yet, no change needed — the AI will read the corrected spec when it gets there.</div>
           </div>
         </div>
         <div class="sf-row">
           <div class="sf-num">4</div>
           <div class="sf-body">
-            <div class="sf-action" style="color:#89ddff;">Validate the updated spec</div>
+            <div class="sf-action" style="color:#268bd2;">Validate the updated spec</div>
             <div class="sf-detail">Run <code>openspec validate --change bridgespec-scaffold</code> to confirm the edited spec file still passes. A typo in a scenario header can silently break the validator.</div>
             <div class="sf-cmd">openspec validate --change bridgespec-scaffold</div>
           </div>
@@ -323,7 +212,7 @@
         <div class="sf-row">
           <div class="sf-num">5</div>
           <div class="sf-body">
-            <div class="sf-action" style="color:#6a9f6a;">Resume in a fresh context</div>
+            <div class="sf-action" style="color:#859900;">Resume in a fresh context</div>
             <div class="sf-detail">Clear the context window. Run <code>/opsx:apply</code>. The AI reads the corrected spec and implements against it. The unchecked task will be picked up automatically.</div>
           </div>
         </div>

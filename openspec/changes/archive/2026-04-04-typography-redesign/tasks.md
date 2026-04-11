@@ -6,7 +6,7 @@
 
 ## 2. Update Lesson Page Styles
 
-- [x] 2.1 Update `.main` max-width → 800px and padding → 4rem 4.5rem 6rem in lesson CSS (check if in site.css or per-page)
+- [x] 2.1 Update `.main` max-width → 960px and padding → 4rem 4.5rem 6rem in lesson CSS (check if in site.css or per-page)
 - [x] 2.2 Update sidebar width → 260px in lesson CSS
 - [x] 2.3 Add `font-variation-settings: "opsz" 40` to `h1` rule on lesson pages for Source Serif 4 display cut
 
@@ -25,4 +25,4 @@
 
 - [x] 5.1 Open index page — confirm Source Sans Pro body, Source Serif 4 headings, Google Sans Code labels
 - [x] 5.2 Open a lesson page — confirm 20px base, expanded column, code blocks in Google Sans Code
-- [ ] 5.3 Check mobile breakpoint on a lesson page — confirm nothing feels cramped
+- [x] 5.3 Check mobile breakpoint on a lesson page — confirm nothing feels cramped

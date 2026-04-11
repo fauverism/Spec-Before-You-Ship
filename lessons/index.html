@@ -68,7 +68,7 @@
     color: var(--ink-3);
     letter-spacing: -0.01em;
     margin-top: 0.3em;
-    margin-left: 0.07em;
+    margin-left: 3.07em;
   }
 
   .intro-body {
@@ -182,7 +182,7 @@
   }
 
   .l-desc {
-    font-size: 13px;
+    font-size: 15px;
     color: var(--ink-3);
     line-height: 1.5;
     font-weight: 300;
@@ -311,6 +311,46 @@
     margin-top: 1.25rem;
   }
 
+  /* ─── Who this is for ───────────────────────────────── */
+  .for-section {
+    padding: 4rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .for-intro {
+    font-size: 1rem;
+    color: var(--ink-2);
+    line-height: 1.75;
+    font-weight: 300;
+    max-width: 600px;
+    margin-bottom: 1.75rem;
+  }
+
+  .for-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .for-list li {
+    font-size: 0.95rem;
+    color: var(--ink-2);
+    font-weight: 300;
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    line-height: 1.5;
+  }
+
+  .for-list li::before {
+    content: '✓';
+    font-family: var(--mono);
+    font-size: 24px;
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+
   /* ─── Responsive ─────────────────────────────────── */
   @media (max-width: 640px) {
     .col { padding: 0 1.5rem; }
@@ -367,6 +407,21 @@
         <span class="meta-tag">Free</span>
       </div>
     </div>
+  </section>
+
+  <!-- Who this is for ---------------------------------------- -->
+  <section class="for-section">
+    <div class="section-rule">Who this is for</div>
+    <p class="for-intro">
+      For developers who already ship with AI — and keep hitting the same wall: the AI drifts, scope creeps,
+      and the code works but misses what you meant. This tutorial gives that problem a name and a fix.
+    </p>
+    <ul class="for-list">
+      <li>You're comfortable in a terminal and have a project you're actively building</li>
+      <li>You use an AI coding assistant — Claude Code, Cursor, Copilot, or similar — as a daily tool</li>
+      <li>You've felt the back-and-forth: clarify, re-clarify, fix what the AI broke while fixing the last thing</li>
+      <li>You want a lightweight process that fits solo work, not a team methodology</li>
+    </ul>
   </section>
 
   <!-- Curriculum --------------------------------------------- -->
