@@ -1,0 +1,62 @@
+---
+import LessonLayout from '../../layouts/LessonLayout.astro';
+---
+
+<style is:global>
+  .ft-dir { color: var(--code-keyword); }
+  .ft-new { color: var(--code-string); }
+  .ft-dim { color: var(--ink-3); }
+</style>
+
+<LessonLayout title="The Spec" lessonNum={4}>
+  <main class="main">
+    <div class="breadcrumb">
+      <a href="/">Spec Before You Ship</a>
+      <span class="sep">/</span>
+      <span class="current">Lesson 04</span>
+    </div>
+
+    <div class="lesson-num">Lesson 04</div>
+    <h1>The Spec</h1>
+
+    <div class="lesson">
+
+      <p>The proposal named two capabilities: <code>toast-appearance</code> and <code>toast-lifecycle</code>. OpenSpec has already turned those into spec files — one per capability, each sitting in its own folder:</p>
+
+      <div class="file-tree">
+        <pre><code><span class="ft-dir">openspec/changes/toast-notifications/</span>
+├── .openspec.yaml
+├── proposal.md
+├── <span class="ft-new">toast-appearance/</span>
+│   └── <span class="ft-new">spec.md</span>
+└── <span class="ft-new">toast-lifecycle/</span>
+    └── <span class="ft-new">spec.md</span></code></pre>
+      </div>
+
+      <p>Open both and read them before moving on.</p>
+
+      <p>Each spec is structured the same way: a requirement stated plainly, then scenarios in WHEN/THEN format. <code>toast-appearance</code> covers what toasts look like — the four variants, their colors and icons, where they sit on screen, how they animate in. <code>toast-lifecycle</code> covers how they behave over time — auto-dismiss after 3 seconds, click to close, the exit animation before removal from the DOM.</p>
+
+      <p>This is where the second a-ha happens.</p>
+
+      <p>Look at the auto-dismiss scenario: <em>when a toast has been visible for 3 seconds, it begins its exit animation and is removed from the DOM.</em> That's not just "dismiss after 3 seconds" — it's a sequencing decision. The animation plays first. The DOM removal happens after. Without this written down, the AI might remove the element immediately and skip the animation entirely. It would be a reasonable guess. It would also be wrong.</p>
+
+      <p>Every WHEN/THEN in these files is a decision that previously lived in your head or got made silently by the AI. Now it's explicit. Now the AI reads it before it writes a line.</p>
+
+      <p>If a scenario is missing or wrong, edit it now. In lesson 05 you'll write the design doc — how all of this actually gets built.</p>
+
+    </div><!-- .lesson -->
+
+    <div class="next-lesson">
+      <div class="prev-link">
+        <div class="next-label">Previous</div>
+        <a href="/lessons/03-your-first-change/"><span class="arrow">←</span> The Proposal</a>
+      </div>
+      <div class="next-link">
+        <div class="next-label">Next lesson</div>
+        <a href="/lessons/05-the-specs-and-scenarios/">The Design Doc <span class="arrow">→</span></a>
+      </div>
+    </div>
+
+  </main>
+</LessonLayout>

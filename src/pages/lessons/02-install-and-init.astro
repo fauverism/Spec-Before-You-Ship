@@ -1,0 +1,74 @@
+---
+import LessonLayout from '../../layouts/LessonLayout.astro';
+---
+
+<style is:global>
+  .t-shell-prompt { color: var(--code-comment); user-select: none; }
+  .t-shell-out    { color: #859900; }
+  .t-shell-cmd    { color: var(--code-fg); }
+  .ft-dir         { color: var(--code-keyword); }
+  .ft-new         { color: var(--code-string); }
+  .ft-dim         { color: var(--ink-3); }
+</style>
+
+<LessonLayout title="Install &amp; Init" lessonNum={2}>
+  <main class="main">
+    <div class="breadcrumb">
+      <a href="/">Spec Before You Ship</a>
+      <span class="sep">/</span>
+      <span class="current">Lesson 02</span>
+    </div>
+
+    <div class="lesson-num">Lesson 02</div>
+    <h1>Install &amp; Init</h1>
+
+    <div class="lesson">
+
+      <p>One install, one command. By the end of this lesson you have a project directory with OpenSpec initialized and nothing else — a clean slate for lesson 03.</p>
+
+      <h2>Install OpenSpec</h2>
+
+      <div class="shell-block">
+        <pre><code><span class="t-shell-prompt">$ </span><span class="t-shell-cmd">npm install -g @fission-ai/openspec@latest</span></code></pre>
+      </div>
+
+      <h2>Create your project and initialize</h2>
+
+      <div class="shell-block">
+        <pre><code><span class="t-shell-prompt">$ </span><span class="t-shell-cmd">mkdir toast-notifications</span>
+<span class="t-shell-prompt">$ </span><span class="t-shell-cmd">cd toast-notifications</span>
+<span class="t-shell-prompt">$ </span><span class="t-shell-cmd">openspec init</span></code></pre>
+      </div>
+
+      <p>OpenSpec will prompt you to select your AI tool. Pick the one you use — Claude Code, Cursor, Gemini CLI, or whatever's in the list. It sets up everything it needs for that tool automatically.</p>
+
+      <p>Your project looks like this afterward:</p>
+
+      <div class="file-tree">
+        <pre><code><span class="ft-dir">toast-notifications/</span>
+├── <span class="ft-new">.claude/</span>
+└── <span class="ft-new">openspec/</span>
+    ├── <span class="ft-new">changes/</span>
+    ├── <span class="ft-new">specs/</span>
+    └── <span class="ft-new">config.yaml</span></code></pre>
+      </div>
+
+      <p>The <code>.claude</code> folder is invisible — it's there, you don't need to touch it. The <code>openspec/</code> folder is where your work lives. <code>changes/</code> is where proposals and specs go. <code>specs/</code> is where finalized specs accumulate over time. <code>config.yaml</code> is OpenSpec's configuration.</p>
+
+      <p>Nothing else yet. In lesson 03 you'll open your first change and write a proposal for the toast system — before a single line of code gets written.</p>
+
+    </div><!-- .lesson -->
+
+    <div class="next-lesson">
+      <div class="prev-link">
+        <div class="next-label">Previous</div>
+        <a href="/lessons/01-the-chaos-tax/"><span class="arrow">←</span> The Chaos Tax</a>
+      </div>
+      <div class="next-link">
+        <div class="next-label">Next lesson</div>
+        <a href="/lessons/03-your-first-change/">Your First Change <span class="arrow">→</span></a>
+      </div>
+    </div>
+
+  </main>
+</LessonLayout>

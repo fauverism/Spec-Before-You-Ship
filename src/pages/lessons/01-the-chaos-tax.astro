@@ -1,0 +1,40 @@
+---
+import LessonLayout from '../../layouts/LessonLayout.astro';
+---
+
+<LessonLayout title="The Chaos Tax" lessonNum={1}>
+  <main class="main">
+    <div class="breadcrumb">
+      <a href="/">Spec Before You Ship</a>
+      <span class="sep">/</span>
+      <span class="current">Lesson 01</span>
+    </div>
+
+    <div class="lesson-num">Lesson 01</div>
+    <h1>The Chaos Tax</h1>
+
+    <div class="lesson">
+
+      <p>You've been here: the AI writes something, you correct it, the correction breaks something else, and somehow the code keeps getting harder to read. You're not building anymore — you're managing the AI's misunderstandings.</p>
+
+      <p>That's the chaos tax. You pay it on every feature you try to ship with AI.</p>
+
+      <p>The root cause isn't the AI. It's that your requirements only exist in the chat. Chat history is not a spec. The AI fills every gap with a silent guess — what the component should do at its edges, what happens on error, how many is too many. Those guesses accumulate. That's the spiral.</p>
+
+      <p>The fix is boring and it works: write down what you're building before you start. Not a novel — a short proposal, a list of behaviors, a few edge cases. Enough that the AI is reading from a document instead of guessing from context.</p>
+
+      <p><a href="https://github.com/Fission-AI/OpenSpec">OpenSpec</a> is a CLI tool that gives that document a home and a workflow. It lives in your repo, travels with your code, and gives AI tools something real to read.</p>
+
+      <p>That's what this tutorial teaches. You'll build a toast notification system — a small, real-world UI component — using OpenSpec to drive every step. By the end you'll have a pattern you can apply to anything you build.</p>
+
+    </div><!-- .lesson -->
+
+    <div class="next-lesson">
+      <div>
+        <div class="next-label">Next lesson</div>
+        <a href="/lessons/02-install-and-init/">Install &amp; Init <span class="arrow">→</span></a>
+      </div>
+    </div>
+
+  </main>
+</LessonLayout>

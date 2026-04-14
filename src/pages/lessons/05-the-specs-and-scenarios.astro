@@ -1,0 +1,55 @@
+---
+import LessonLayout from '../../layouts/LessonLayout.astro';
+---
+
+<LessonLayout title="The Design Doc" lessonNum={5}>
+  <main class="main">
+    <div class="breadcrumb">
+      <a href="/">Spec Before You Ship</a>
+      <span class="sep">/</span>
+      <span class="current">Lesson 05</span>
+    </div>
+
+    <div class="lesson-num">Lesson 05</div>
+    <h1>The Design Doc</h1>
+
+    <div class="lesson">
+
+      <p>The spec said <em>what</em> the toast system does. The design doc says <em>how</em> it gets built. Open <code>design.md</code> in your change folder.</p>
+
+      <p>Four sections:</p>
+
+      <p><strong>Context</strong> — one paragraph on the constraints. Single file, no build tooling, no framework. This is the proposal's scope decision turned into a working constraint for every decision that follows.</p>
+
+      <p><strong>Goals / Non-Goals</strong> — what this implementation delivers and what it deliberately doesn't. Notice what's in the Non-Goals: accessibility, pause-on-hover, mobile layout. Those aren't oversights — they're decisions. The AI will not add them, because they're written down as out of scope.</p>
+
+      <p><strong>Decisions</strong> — this is the most important section. Four choices are documented here, each with the reasoning behind it:</p>
+
+      <ul class="open-spec-example">
+        <li>A <code>ToastManager</code> class keeps state in one place instead of scattered module-level variables</li>
+        <li>CSS custom properties for variant colors — readable without a preprocessor</li>
+        <li>CSS <code>@keyframes</code> for enter, a <code>.toast--leaving</code> class for exit — this is the spec's sequencing requirement made concrete. The <code>transitionend</code> listener fires after the animation completes, then removes the element. That's how "animation plays first, DOM removal after" actually works in code.</li>
+        <li>A single fixed <code>#toast-container</code> div — toasts stack via normal flow, no JS positioning math</li>
+      </ul>
+
+      <p><strong>Risks / Trade-offs</strong> — two edge cases called out before the AI writes a line. The <code>transitionend</code> listener fires multiple times if multiple properties transition; the fix is <code>once: true</code>. Very old browsers don't support CSS custom properties; acceptable for a tutorial demo.</p>
+
+      <p>The decisions section is doing the same thing the spec did — taking things that would have been silent AI guesses and making them explicit. The difference is that the spec described behavior, and the design doc describes implementation. Both live in your repo. Both get read before code is written.</p>
+
+      <p>If anything here doesn't match how you want it built, edit it now. In lesson 06 you'll break the design into tasks and hand it to the AI.</p>
+
+    </div><!-- .lesson -->
+
+    <div class="next-lesson">
+      <div class="prev-link">
+        <div class="next-label">Previous</div>
+        <a href="/lessons/04-the-proposal/"><span class="arrow">←</span> The Spec</a>
+      </div>
+      <div class="next-link">
+        <div class="next-label">Next lesson</div>
+        <a href="/lessons/06-the-design-doc/">Tasks <span class="arrow">→</span></a>
+      </div>
+    </div>
+
+  </main>
+</LessonLayout>

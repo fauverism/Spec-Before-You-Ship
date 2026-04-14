@@ -1,0 +1,65 @@
+---
+import LessonLayout from '../../layouts/LessonLayout.astro';
+---
+
+<style is:global>
+  .ft-dir { color: var(--code-keyword); }
+  .ft-new { color: var(--code-string); }
+  .ft-dim { color: var(--ink-3); }
+</style>
+
+<LessonLayout title="Ship It" lessonNum={7}>
+  <main class="main">
+    <div class="breadcrumb">
+      <a href="/">Spec Before You Ship</a>
+      <span class="sep">/</span>
+      <span class="current">Lesson 07</span>
+    </div>
+
+    <div class="lesson-num">Lesson 07</div>
+    <h1>Ship It</h1>
+
+    <div class="lesson">
+
+      <p>Your toast system works. The last step is to close out the change.</p>
+
+      <p>Run this:</p>
+
+      <div class="shell-block">
+        <pre><code>/opsx:archive</code></pre>
+      </div>
+
+      <p>OpenSpec moves the <code>toast-notifications</code> folder from <code>changes/</code> to <code>changes/archive/</code>. Your change folder — the proposal, the specs, the design doc, the tasks — is preserved exactly where it is, just marked as done.</p>
+
+      <div class="file-tree">
+        <pre><code><span class="ft-dir">openspec/</span>
+└── <span class="ft-dir">changes/</span>
+    └── <span class="ft-dir">archive/</span>
+        └── <span class="ft-new">toast-notifications/</span>
+            ├── .openspec.yaml
+            ├── proposal.md
+            ├── <span class="ft-new">toast-appearance/</span>
+            │   └── spec.md
+            ├── <span class="ft-new">toast-lifecycle/</span>
+            │   └── spec.md
+            ├── design.md
+            └── tasks.md</code></pre>
+      </div>
+
+      <p>That archive is the record of every decision made during this change — what it was, why it was built this way, what was left out and why. Six months from now, when someone asks why the exit animation works the way it does, the answer is in <code>design.md</code>.</p>
+
+      <p>This is the pattern. Proposal, spec, design, tasks, implement, archive. You've done it once end to end. The next change starts the same way — one sentence to <code>/opsx:propose</code>, and the artifacts follow.</p>
+
+      <p>The chaos tax doesn't go away entirely. But now your requirements have a home before the first line of code is written. The AI reads them instead of guessing. And when something goes sideways, you have a document to point at — not a chat history.</p>
+
+    </div><!-- .lesson -->
+
+    <div class="next-lesson">
+      <div class="prev-link">
+        <div class="next-label">Previous</div>
+        <a href="/lessons/06-the-design-doc/"><span class="arrow">←</span> Tasks</a>
+      </div>
+    </div>
+
+  </main>
+</LessonLayout>

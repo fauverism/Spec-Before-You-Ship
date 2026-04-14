@@ -1,0 +1,75 @@
+---
+import LessonLayout from '../../layouts/LessonLayout.astro';
+---
+
+<style is:global>
+  .t-shell-prompt { color: var(--code-comment); user-select: none; }
+  .t-shell-out    { color: #859900; }
+  .t-shell-cmd    { color: var(--code-fg); }
+  .ft-dir         { color: var(--code-keyword); }
+  .ft-new         { color: var(--code-string); }
+  .ft-dim         { color: var(--ink-3); }
+</style>
+
+<LessonLayout title="The Proposal" lessonNum={3}>
+  <main class="main">
+    <div class="breadcrumb">
+      <a href="/">Spec Before You Ship</a>
+      <span class="sep">/</span>
+      <span class="current">Lesson 03</span>
+    </div>
+
+    <div class="lesson-num">Lesson 03</div>
+    <h1>The Proposal</h1>
+
+    <div class="lesson">
+
+      <p>Before any code gets written, you need to describe what you're building. Not to the AI — to yourself. The proposal is that description made permanent.</p>
+
+      <p>Run this in your project directory:</p>
+
+      <div class="shell-block">
+        <pre><code><span class="t-shell-prompt">you: </span><span class="t-shell-cmd">/opsx:propose "a toast notification system — success, error, warning, and info variants, auto-dismiss after 3 seconds, click to close, stacks when multiple appear"</span></code></pre>
+      </div>
+
+      <p>OpenSpec reads your <code>config.yaml</code>, reads what you typed, and generates a <code>proposal.md</code> inside a new change folder:</p>
+
+      <div class="file-tree">
+        <pre><code><span class="ft-dir">openspec/</span>
+└── <span class="ft-dir">changes/</span>
+    └── <span class="ft-new">toast-notifications/</span>
+        ├── <span class="ft-new">.openspec.yaml</span>
+        └── <span class="ft-new">proposal.md</span></code></pre>
+      </div>
+
+      <p>Open <code>proposal.md</code> and read through it. You'll see four sections:</p>
+
+      <p><strong>Why</strong> — one paragraph on why this change exists. Grounds everything that follows.</p>
+
+      <p><strong>What Changes</strong> — a bulleted list of the concrete outputs: what files get created, what behaviors get added. No implementation detail yet — just scope.</p>
+
+      <p><strong>Capabilities</strong> — the named behaviors this change introduces. Yours will have two: <code>toast-appearance</code> (what toasts look like) and <code>toast-lifecycle</code> (how they show, dismiss, and stack). These names matter — in lesson 04 each capability becomes its own spec file.</p>
+
+      <p><strong>Impact</strong> — what this change touches. In this case: one output file, no dependencies, no existing code affected.</p>
+
+      <p>This is the first place the a-ha happens.</p>
+
+      <p>You typed one sentence. The tool produced a scoped, structured description of the work. More importantly — it made decisions you didn't consciously make. <em>Single HTML file. No dependencies. No build step.</em> You implied that, but you didn't write it down. Now it's written down, and the AI will read this file before it writes a line.</p>
+
+      <p>If anything is wrong, edit it now. The spec comes next.</p>
+
+    </div><!-- .lesson -->
+
+    <div class="next-lesson">
+      <div class="prev-link">
+        <div class="next-label">Previous</div>
+        <a href="/lessons/02-install-and-init/"><span class="arrow">←</span> Install &amp; Init</a>
+      </div>
+      <div class="next-link">
+        <div class="next-label">Next lesson</div>
+        <a href="/lessons/04-the-proposal/">The Spec <span class="arrow">→</span></a>
+      </div>
+    </div>
+
+  </main>
+</LessonLayout>
