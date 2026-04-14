@@ -1,0 +1,58 @@
+---
+import LessonLayout from '../../layouts/LessonLayout.astro';
+---
+
+<LessonLayout title="Tasks" lessonNum={6}>
+  <main class="main">
+    <div class="breadcrumb">
+      <a href="/">Spec Before You Ship</a>
+      <span class="sep">/</span>
+      <span class="current">Lesson 06</span>
+    </div>
+
+    <div class="lesson-num">Lesson 06</div>
+    <h1>Tasks</h1>
+
+    <div class="lesson">
+
+      <p>You have a proposal, two specs, and a design doc. The AI has everything it needs. Now you break the work into tasks and hand it over.</p>
+
+      <p>Run this:</p>
+
+      <div class="shell-block">
+        <pre><code>/opsx:apply</code></pre>
+      </div>
+
+      <p>OpenSpec reads all four artifacts and generates a <code>tasks.md</code> in your change folder. Open it. You'll see three sections — HTML Structure, CSS, JavaScript — with numbered checkboxes:</p>
+
+      <ul class="open-spec-example">
+        <li>Build the page scaffold and container div</li>
+        <li>Style the variants using CSS custom properties</li>
+        <li>Add the enter animation and exit transition</li>
+        <li>Implement <code>ToastManager</code> with <code>show()</code> and <code>dismiss()</code></li>
+        <li>Wire the demo buttons</li>
+      </ul>
+
+      <p>Each task maps directly to a decision in the design doc. The <code>ToastManager</code> class is task 3.1 because the design doc named it. The <code>once: true</code> fix is baked into task 3.3 because the risks section flagged it. Nothing is a surprise.</p>
+
+      <p>Now run <code>/opsx:apply</code> a second time. This time it doesn't generate tasks — it reads them and starts working through them, checking each one off as it goes.</p>
+
+      <p>Watch what happens. The AI isn't guessing at the shape of the code — it's reading the spec and executing against it. When it implements <code>dismiss()</code>, it knows the animation plays before the element is removed because that's in <code>toast-lifecycle/spec.md</code>. When it defines the color variables, it knows the names because the design doc said "CSS custom properties for variant colors."</p>
+
+      <p>When it's done, open <code>toast.html</code> in a browser and try each button. The implementation should match what you wrote in lessons 03 through 05 — because the AI read those files instead of guessing.</p>
+
+    </div><!-- .lesson -->
+
+    <div class="next-lesson">
+      <div class="prev-link">
+        <div class="next-label">Previous</div>
+        <a href="/lessons/05-the-specs-and-scenarios/"><span class="arrow">←</span> The Design Doc</a>
+      </div>
+      <div class="next-link">
+        <div class="next-label">Next lesson</div>
+        <a href="/lessons/07-tasks/">Ship It <span class="arrow">→</span></a>
+      </div>
+    </div>
+
+  </main>
+</LessonLayout>

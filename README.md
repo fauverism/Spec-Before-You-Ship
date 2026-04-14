@@ -1,23 +1,24 @@
 # Spec-Before-You-Ship
 
-A small learning site and example repository for using OpenSpec to plan, scope, and ship changes.
+A small learning site and example repository for using OpenSpec to plan, scope, and ship changes. Built with [Astro](https://astro.build) and deployed as a static site.
 
-## What’s inside
+## What's inside
 
-- `lessons/` – HTML course content covering:
-  - the chaos tax
-  - install and init
-  - your first change
-  - proposal and design docs
-  - specs, scenarios, tasks, and mid-flight edits
-- `assets/site.css` – shared styling for the lesson site
+- `src/pages/lessons/` – 11 Astro lesson pages
+- `src/pages/` – `index.astro` (home) and `contact.astro`
+- `src/layouts/` – `LessonLayout.astro` and `PageLayout.astro`
+- `src/data/lessons.ts` – central lesson registry (slug, title, number)
+- `public/assets/` – shared CSS (site.css, lesson.css, lesson-01.css)
 - `openspec/` – OpenSpec metadata, change drafts, and specs
 - `CHANGELOG.md` – repository change history
 
-## How to use
+## Dev commands
 
-Open `lessons/index.html` in a browser to view the course.
-Review `openspec/changes/` for example OpenSpec change artifacts.
+```bash
+npm run dev      # Start local dev server at localhost:4321
+npm run build    # Build static site to dist/
+npm run preview  # Preview the built site locally
+```
 
 ## License
 
