@@ -1,5 +1,36 @@
 # Changelog
 
+## v0.0.3-alpha — 2026-04-14
+
+### Astro Migration
+
+- Migrated site from plain HTML files to Astro static site framework
+- Created `src/layouts/LessonLayout.astro` (data-driven sidebar, prev/next nav, per-lesson CSS injection) and `src/layouts/PageLayout.astro`
+- Migrated all 11 lesson pages to `src/pages/lessons/*.astro` and index/contact to `src/pages/`
+- Added `src/data/lessons.ts` with typed lesson metadata array
+- Moved shared stylesheets from `assets/` to `public/assets/`
+- Deleted all old `lessons/*.html` flat files
+- Added Vercel static adapter (`astro.config.mjs`)
+- Updated `README.md` to reflect Astro dev/build commands
+
+### Solarized Dark Theme
+
+- Added Solarized Dark color token overrides under `html.dark` in `site.css`
+- Added `--backdrop` CSS variable to replace hardcoded rgba values in `.site-header` and `.mob-nav`
+- Added `html.dark` dialogue overrides in `lesson-01.css`
+- Added inline theme init script to both layouts (reads `localStorage.theme`, falls back to `prefers-color-scheme`, applies `html.dark` before paint — no flash)
+- Added dark/light toggle button to sidebar (lesson pages) and header nav (other pages)
+- Toggle persists preference to `localStorage` and swaps moon/sun icon
+
+### OpenSpec
+
+- Archived change: `2026-04-12-astro-migration`
+- Archived change: `2026-04-14-solarized-dark-theme`
+- Specs added: `astro-site-structure`, `dark-theme`
+- Spec updated: `shared-stylesheet`
+
+---
+
 ## v0.0.1-alpha — 2026-03-29
 
 Initial alpha release.
