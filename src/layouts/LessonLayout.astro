@@ -4,9 +4,10 @@ import { lessons } from '../data/lessons';
 interface Props {
   title: string;
   lessonNum: number;
+  description?: string;
 }
 
-const { title, lessonNum } = Astro.props;
+const { title, lessonNum, description } = Astro.props;
 
 const currentIndex = lessons.findIndex(l => l.num === lessonNum);
 const prevLesson = currentIndex > 0 ? lessons[currentIndex - 1] : null;
@@ -20,6 +21,7 @@ const counter = `${String(lessonNum).padStart(2, '0')} / ${lessons.length}`;
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{title} — Spec Before You Ship</title>
+  {description && <meta name="description" content={description}>}
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Code:wght@400;500&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400&display=swap" rel="stylesheet">
@@ -73,7 +75,12 @@ const counter = `${String(lessonNum).padStart(2, '0')} / ${lessons.length}`;
     <div class="sidebar-signup">
       <div class="ss-label">Stay Updated</div>
       {/* <p class="ss-text">New lessons and essays on shipping software with intention.</p> */}
-      <form action="#" method="post">
+      <form
+        action="https://buttondown.com/api/emails/embed-subscribe/fauverism"
+        method="post"
+        target="popupwindow"
+        onsubmit="window.open('https://buttondown.com/fauverism', 'popupwindow')"
+      >
         <input type="email" name="email" placeholder="your@email.com" required>
         <button type="submit">Subscribe →</button>
       </form>
