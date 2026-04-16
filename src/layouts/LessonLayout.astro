@@ -74,15 +74,17 @@ const counter = `${String(lessonNum).padStart(2, '0')} / ${lessons.length}`;
 
     <div class="sidebar-signup">
       <div class="ss-label">Stay Updated</div>
-      {/* <p class="ss-text">New lessons and essays on shipping software with intention.</p> */}
       <form
-        action="https://buttondown.com/api/emails/embed-subscribe/fauverism"
+        action="https://buttondown.com/api/emails/embed-subscribe/fauver"
         method="post"
-        target="popupwindow"
-        onsubmit="window.open('https://buttondown.com/fauverism', 'popupwindow')"
+        class="embeddable-buttondown-form"
       >
-        <input type="email" name="email" placeholder="your@email.com" required>
-        <button type="submit">Subscribe →</button>
+        <label for="bd-email">Enter your email</label>
+        <input type="email" name="email" id="bd-email" />
+        <input type="submit" value="Subscribe" />
+        <p>
+          <a href="https://buttondown.com/refer/fauver" target="_blank">Powered by Buttondown.</a>
+        </p>
       </form>
     </div>
   </aside>
