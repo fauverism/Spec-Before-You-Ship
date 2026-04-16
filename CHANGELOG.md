@@ -1,5 +1,27 @@
 # Changelog
 
+## v0.0.5-alpha — 2026-04-16
+
+### Newsletter signup
+
+- Added inline submission feedback to the homepage newsletter form: submitting, success, and error states
+- Submit button disabled while request is in flight to prevent duplicate submissions
+- Status messages exposed via `aria-live="polite"` for screen reader announcements
+- Wired homepage form to Buttondown (`fauverism`) with official embed code
+- Updated lesson sidebar subscribe form to Buttondown official embed code
+
+### Lesson URLs and SEO
+
+- Renamed lesson pages 03–07 so URL slugs match their actual content titles (e.g. `/03-the-proposal/`, `/04-the-spec/`, `/05-the-design-doc/`, `/06-tasks/`, `/07-ship-it/`)
+- Added per-lesson `<meta name="description">` tags via `LessonLayout`
+
+### OpenSpec
+
+- Archived change: `2026-04-16-add-newsletter-signup-confirmation`
+- Spec added: `newsletter-signup-feedback`
+
+---
+
 ## v0.0.3-alpha — 2026-04-14
 
 ### Astro Migration
