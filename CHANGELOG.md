@@ -1,6 +1,30 @@
 # Changelog
 
-## v0.0.6 — 2026-04-20
+## v0.1.0 — 2026-04-20
+
+### New Lesson: The Exploration
+
+- Added new lesson 03: "The Exploration" — teaches OpenSpec's exploration mode as a thinking partner before writing proposals
+- Lesson showcases actual conversation that led to its creation (announcement → new lesson idea)
+- Includes second example (Postgres vs SQLite) showing exploration for technical decisions
+- Added "What exploration is NOT" section to clear up misconceptions
+- Added exit note at top: exploration is optional, you can leave anytime
+
+### Lesson Flow Updates
+
+- Renumbered all lessons: 03→04 (Proposal), 04→05 (Spec), 05→06 (Design Doc), 06→07 (Tasks), 07→08 (Ship It)
+- Added exploration mode references in lessons 04, 05, 06 connecting back to lesson 03
+- Updated homepage lesson list with correct URLs and 8 lessons (was 7)
+- Fixed broken lesson links on homepage (old `/03-the-proposal/` etc. were 404ing)
+
+### Newsletter
+
+- Fixed sidebar subscribe form: added missing `<input type="hidden" name="embed" value="1">` for Buttondown
+
+### OpenSpec
+
+- Created change: `announce-launch` for launch announcement across newsletter, website, DM
+- Created change: `website-tracking` (archived — decided tracking not needed for now)
 
 ### Comms
 
