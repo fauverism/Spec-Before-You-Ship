@@ -55,7 +55,7 @@ const counter = `${String(lessonNum).padStart(2, '0')} / ${lessons.length}`;
 
   <aside class="sidebar">
     <div class="sidebar-label">Tutorial</div>
-    <div class="sidebar-title">Spec Before You Ship</div>
+    <div class="sidebar-title"><a href="/">Spec <span class="before-you-ship">Before You Ship</span></a></div>
 
     <nav>
       {lessons.map(lesson => (
@@ -79,12 +79,10 @@ const counter = `${String(lessonNum).padStart(2, '0')} / ${lessons.length}`;
         method="post"
         class="embeddable-buttondown-form"
       >
+        <input type="hidden" name="embed" value="1">
         <label for="bd-email">Enter your email</label>
         <input type="email" name="email" id="bd-email" />
-        <input type="submit" value="Subscribe" />
-        <p>
-          <a href="https://buttondown.com/refer/fauver" target="_blank">Powered by Buttondown.</a>
-        </p>
+        <input type="submit" value="Subscribe" class="sidebar-input-button" />
       </form>
     </div>
   </aside>
@@ -101,7 +99,7 @@ const counter = `${String(lessonNum).padStart(2, '0')} / ${lessons.length}`;
       <li><a href="/lessons/01-the-chaos-tax/">Start Learning</a></li>
       <li><a href="/contact/">Contact</a></li>
     </ul>
-    <span class="footer-version">v0.0.3-alpha</span>
+    <span class="footer-version">v0.1.0</span>
   </div>
 </footer>
 
