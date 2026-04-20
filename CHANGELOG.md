@@ -1,6 +1,12 @@
 # Changelog
 
-## v0.0.5-alpha — 2026-04-16
+## v0.1.0 - TBD
+
+### Comms
+
+- Posted in the OpenSpec Discord along with stickers created
+
+## v0.0.5 — 2026-04-16
 
 ### Newsletter signup
 

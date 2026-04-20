@@ -8,20 +8,22 @@ import LessonLayout from '../../layouts/LessonLayout.astro';
   .ft-dim { color: var(--ink-3); }
 </style>
 
-<LessonLayout title="The Spec" lessonNum={4} description="Turn silent AI guesses into explicit, written decisions.">
+<LessonLayout title="The Spec" lessonNum={5} description="Turn silent AI guesses into explicit, written decisions.">
   <main class="main">
     <div class="breadcrumb">
       <a href="/">Spec Before You Ship</a>
       <span class="sep">/</span>
-      <span class="current">Lesson 04</span>
+      <span class="current">Lesson 05</span>
     </div>
 
-    <div class="lesson-num">Lesson 04</div>
+    <div class="lesson-num">Lesson 05</div>
     <h1>The Spec</h1>
 
     <div class="lesson">
 
       <p>The proposal named two capabilities: <code>toast-appearance</code> and <code>toast-lifecycle</code>. OpenSpec has already turned those into spec files — one per capability, each sitting in its own folder:</p>
+
+      <p class="exploration-ref"><strong>Note:</strong> What goes into the spec often emerges from exploration. When you explored "should I use Postgres or SQLite?", the tradeoffs you surfaced (offline, single user, embedded) become the constraints you document in the spec. Exploration surfaces the questions; the spec captures the answers.</p>
 
       <div class="file-tree">
         <pre><code><span class="ft-dir">openspec/changes/toast-notifications/</span>
@@ -50,11 +52,11 @@ import LessonLayout from '../../layouts/LessonLayout.astro';
     <div class="next-lesson">
       <div class="prev-link">
         <div class="next-label">Previous</div>
-        <a href="/lessons/03-the-proposal/"><span class="arrow">←</span> The Proposal</a>
+        <a href="/lessons/04-the-proposal/"><span class="arrow">←</span> The Proposal</a>
       </div>
       <div class="next-link">
         <div class="next-label">Next lesson</div>
-        <a href="/lessons/05-the-design-doc/">The Design Doc <span class="arrow">→</span></a>
+        <a href="/lessons/06-the-design-doc/">The Design Doc <span class="arrow">→</span></a>
       </div>
     </div>
 

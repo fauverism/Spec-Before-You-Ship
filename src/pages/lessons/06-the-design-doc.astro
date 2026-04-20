@@ -2,15 +2,15 @@
 import LessonLayout from '../../layouts/LessonLayout.astro';
 ---
 
-<LessonLayout title="The Design Doc" lessonNum={5} description="Document how it gets built before the AI writes a line.">
+<LessonLayout title="The Design Doc" lessonNum={6} description="Document how it gets built before the AI writes a line.">
   <main class="main">
     <div class="breadcrumb">
       <a href="/">Spec Before You Ship</a>
       <span class="sep">/</span>
-      <span class="current">Lesson 05</span>
+      <span class="current">Lesson 06</span>
     </div>
 
-    <div class="lesson-num">Lesson 05</div>
+    <div class="lesson-num">Lesson 06</div>
     <h1>The Design Doc</h1>
 
     <div class="lesson">
@@ -18,6 +18,8 @@ import LessonLayout from '../../layouts/LessonLayout.astro';
       <p>The spec said <em>what</em> the toast system does. The design doc says <em>how</em> it gets built. Open <code>design.md</code> in your change folder.</p>
 
       <p>Four sections:</p>
+
+      <p class="exploration-ref"><strong>Note:</strong> The design doc is where exploration pays off. When you explored "Postgres vs SQLite", the reasoning (embedded, offline, single file) became the constraints in Context. The tradeoffs you surfaced became Goals/Non-Goals. The questions exploration asked become the Decisions you document here.</p>
 
       <p><strong>Context</strong> — one paragraph on the constraints. Single file, no build tooling, no framework. This is the proposal's scope decision turned into a working constraint for every decision that follows.</p>
 
@@ -43,11 +45,11 @@ import LessonLayout from '../../layouts/LessonLayout.astro';
     <div class="next-lesson">
       <div class="prev-link">
         <div class="next-label">Previous</div>
-        <a href="/lessons/04-the-spec/"><span class="arrow">←</span> The Spec</a>
+        <a href="/lessons/05-the-spec/"><span class="arrow">←</span> The Spec</a>
       </div>
       <div class="next-link">
         <div class="next-label">Next lesson</div>
-        <a href="/lessons/06-tasks/">Tasks <span class="arrow">→</span></a>
+        <a href="/lessons/07-tasks/">Tasks <span class="arrow">→</span></a>
       </div>
     </div>
 

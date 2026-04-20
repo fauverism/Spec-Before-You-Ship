@@ -4,6 +4,25 @@
    Lesson 01 dialogue styles live in lesson-01.css.
    ──────────────────────────────────────────────────────────────────────────── */
 
+/* ─── Exploration reference callout ───────────────────────────────────────── */
+
+.exploration-ref {
+  background: var(--surface-2);
+  border-left: 3px solid var(--accent);
+  padding: 0.75rem 1rem;
+  margin: 1rem 0 1.5rem;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+
+.exploration-ref code {
+  background: var(--surface-1);
+  padding: 0.1rem 0.3rem;
+  border-radius: 3px;
+  font-size: 0.85em;
+}
+
 /* ─── Layout ──────────────────────────────────────────────────────────────── */
 
 .layout {
@@ -41,6 +60,24 @@
   line-height: 1.4;
   color: var(--ink);
   margin-bottom: 1.5rem;
+  font-weight: 400;
+}
+.sidebar-title a {
+  color: var(--ink);
+  text-decoration: none;
+  font-size: 2.05rem;
+}
+.sidebar-title a:hover {
+  color: var(--accent);
+}
+.sidebar-title a span.before-you-ship {
+  display: block;
+  font-style: italic;
+  color: var(--ink-3);
+  font-weight: 300;
+  font-size: 0.9rem;
+  margin: 0 0 0 2rem;
+  line-height: 0rem;
 }
 
 .sidebar nav { margin-bottom: 2rem; }
@@ -549,12 +586,16 @@ pre code {
 }
 
 /* ─── Updating Unordered lists──────────────────────────────────────────────────────────── */
-.lesson ul.open-spec-example {
+.lesson ul.open-spec-example,
+.lesson ol.formatted,
+.lesson ul.formatted  {
   margin: 0 0 1.25rem 1.5rem;
 }
-.lesson ul.open-spec-example li {
-  font-family: var(--mono);
-  font-size: 18px;
+.lesson ul.open-spec-example li,
+.lesson ol.formatted li,
+.lesson ul.formatted li {
+  /* font-family: var(--mono); */
+  /* font-size: 18px; */
   color: var(--ink-2);
   margin-bottom: 0.5rem;
   line-height: 1.5;

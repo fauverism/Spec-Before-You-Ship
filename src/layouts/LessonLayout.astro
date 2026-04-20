@@ -55,7 +55,7 @@ const counter = `${String(lessonNum).padStart(2, '0')} / ${lessons.length}`;
 
   <aside class="sidebar">
     <div class="sidebar-label">Tutorial</div>
-    <div class="sidebar-title">Spec Before You Ship</div>
+    <div class="sidebar-title"><a href="/">Spec <span class="before-you-ship">Before You Ship</span></a></div>
 
     <nav>
       {lessons.map(lesson => (
@@ -79,6 +79,7 @@ const counter = `${String(lessonNum).padStart(2, '0')} / ${lessons.length}`;
         method="post"
         class="embeddable-buttondown-form"
       >
+        <input type="hidden" name="embed" value="1">
         <label for="bd-email">Enter your email</label>
         <input type="email" name="email" id="bd-email" />
         <input type="submit" value="Subscribe" />

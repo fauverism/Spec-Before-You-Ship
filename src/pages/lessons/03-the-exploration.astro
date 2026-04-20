@@ -1,0 +1,263 @@
+---
+import LessonLayout from '../../layouts/LessonLayout.astro';
+---
+
+<LessonLayout title="The Exploration" lessonNum={3} description="Think deeply before you write. Use OpenSpec's exploration mode to crystallize ideas before turning them into proposals.">
+  <main class="main">
+    <div class="breadcrumb">
+      <a href="/">Spec Before You Ship</a>
+      <span class="sep">/</span>
+      <span class="current">Lesson 03</span>
+    </div>
+
+    <div class="lesson-num">Lesson 03</div>
+    <h1>The Exploration</h1>
+
+    <div class="lesson">
+
+      <p>Before you write a proposal, talk it through. OpenSpec's explore mode is a thinking partner — it asks questions, draws diagrams, challenges assumptions, and helps you see what you actually need to build.</p>
+
+      <p>This lesson is different. Instead of code, you'll see a conversation.</p>
+
+
+      <h2>How to enter</h2>
+
+      <p>Run this in your project directory:</p>
+
+      <div class="shell-block">
+        <pre><code><span class="t-shell-prompt">$ </span><span class="t-shell-cmd">/opsx:explore</span></code></pre>
+      </div>
+
+      <p>That's it. You're now in exploration mode. The AI knows the rules: think deeply, visualize freely, ask questions, never write code.</p>
+
+      <h2>What happened</h2>
+
+      <p>I wanted to tell people about Spec Before You Ship. Three channels: Buttondown newsletter, my website, and direct messages. I had a draft, but something felt off.</p>
+
+      <p>So I entered exploration mode. Here's what happened:</p>
+
+      <div class="exploration-chat">
+        <div class="chat-msg user">
+          <div class="chat-label">Me</div>
+          <div class="chat-text">I need to communicate that Spec Before You Ship has launched. I'd like to create a post for my Buttondown newsletter, my website, and have some bullet points as a reference for when I'm writing to people directly.</div>
+        </div>
+        <div class="chat-msg ai">
+          <div class="chat-label">OpenSpec</div>
+          <div class="chat-text">Let me explore the codebase to understand what Spec Before You Ship is, then help you think through the communication strategy.</div>
+        </div>
+        <div class="chat-msg ai">
+          <div class="chat-label">OpenSpec</div>
+          <div class="chat-text">Now I have a good picture. Let me think through this with you.</div>
+        </div>
+      </div>
+
+      <p>Instead of writing copy, it asked questions. Who? What's the hook? What angles work best?</p>
+
+      <h2>The a-ha moment</h2>
+
+      <p>Here's what emerged from that conversation:</p>
+
+      <div class="exploration-chat">
+        <div class="chat-msg ai">
+          <div class="chat-label">OpenSpec</div>
+          <div class="chat-text">## Quick Brainstorm of Key Points<br><br>What might go in the announcement:<br><br>- <strong>What it is</strong>: Free 7-lesson site teaching OpenSpec workflow<br>- <strong>What you'll learn</strong>: How to write proposals, specs, design docs, and tasks<br>- <strong>Why it exists</strong>: Because most devs skip planning and pay the "chaos tax"<br>- <strong>Who it's for</strong>: Anyone who writes code and wants to ship with less waste</div>
+        </div>
+        <div class="chat-msg user">
+          <div class="chat-label">Me</div>
+          <div class="chat-text">I also need to fix the subscription form for the newsletter in the sidebar.</div>
+        </div>
+        <div class="chat-msg ai">
+          <div class="chat-label">OpenSpec</div>
+          <div class="chat-text">I see the issue! Looking at the two forms... The sidebar form is missing <code>&lt;input type="hidden" name="embed" value="1"&gt;</code>.</div>
+        </div>
+        <div class="chat-msg user">
+          <div class="chat-label">Me</div>
+          <div class="chat-text">Yes add it. I'm not sure if I'm loving the newsletter. I'm thinking I'll just write it myself. And actually for the lessons I want to add a new page before `03 The Proposal` — I want to have a page dedicated to `Explore mode`.</div>
+        </div>
+      </div>
+
+      <p><strong>See what happened?</strong> I came in with one thing (announcement copy) and left with three things:</p>
+
+      <ol class="formatted">
+        <li>Fixed the sidebar form</li>
+        <li>A new lesson idea (The Exploration)</li>
+        <li>Clear direction on what that lesson should cover</li>
+      </ol>
+
+      <p>That's explore mode working. I didn't write code. I didn't create a proposal. And the best next steps emerged naturally.</p>
+
+      <h2>Another example</h2>
+
+      <p>Exploration isn't just for announcements. Here's a technical decision I explored:</p>
+
+      <div class="exploration-chat">
+        <div class="chat-msg user">
+          <div class="chat-label">Me</div>
+          <div class="chat-text">Should I use Postgres or SQLite for my CLI tool?</div>
+        </div>
+        <div class="chat-msg ai">
+          <div class="chat-label">OpenSpec</div>
+          <div class="chat-text">That depends on context. What's the tool for?</div>
+        </div>
+        <div class="chat-msg user">
+          <div class="chat-label">Me</div>
+          <div class="chat-text">A CLI that tracks local dev environments. No daemon, single user, works offline.</div>
+        </div>
+        <div class="chat-msg ai">
+          <div class="chat-label">OpenSpec</div>
+          <div class="chat-text">That changes everything.<br><br>SQLite. Not even close.<br><br><strong>Why:</strong> Embedded in the binary, works offline, single file, no server needed.<br><br>Unless... is there a sync component?</div>
+        </div>
+      </div>
+
+      <p>Five minutes of exploration saved me from a bad architectural choice. The answer was obvious once the right questions were asked.</p>
+
+      <hr class="lesson-divider">
+
+      <h2>What exploration is NOT</h2>
+
+      <ul class="formatted">
+        <li><strong>Not a requirement</strong> — You can skip it. Go straight to proposal if you want.</li>
+        <li><strong>Not a commitment</strong> — Nothing is saved until you decide to create a proposal.</li>
+        <li><strong>Not code</strong> — It will never write code. That's the rule.</li>
+        <li><strong>Not slow</strong> — It can be 5 minutes or 30. You decide.</li>
+      </ul>
+
+      <h2>Why this matters</h2>
+
+      <p>Most developers skip from "I have an idea" to "Let me write code." Exploration mode sits in between — it's where better decisions happen.</p>
+
+      <p>When you enter exploration mode, you're not committing to anything. You're:</p>
+
+      <ul class="formatted">
+        <li><strong>Asking questions</strong> — not jumping to solutions</li>
+        <li><strong>Visualizing</strong> — diagrams, tradeoffs, comparisons</li>
+        <li><strong>Grounding</strong> — in your actual codebase, not theory</li>
+        <li><strong>Leaving when you want</strong> — it's optional, not a required step</li>
+      </ul>
+
+      <h2>What comes next</h2>
+
+      <p>This lesson connects to everything after it:</p>
+
+      <ul class="formatted">
+        <li><strong>The Proposal</strong> — When exploration crystallizes into something worth pursuing, that's a proposal</li>
+        <li><strong>The Spec</strong> — What you learn in exploration shapes what goes in the spec</li>
+        <li><strong>The Design Doc</strong> — Tradeoffs you surface here become design decisions later</li>
+      </ul>
+
+      <p>Exploration is where the thinking happens. The rest is just writing it down.</p>
+
+    </div><!-- .lesson -->
+
+    <div class="next-lesson">
+      <div class="prev-link">
+        <div class="next-label">Previous</div>
+        <a href="/lessons/02-install-and-init/"><span class="arrow">←</span> Install & Init</a>
+      </div>
+      <div class="next-link">
+        <div class="next-label">Next lesson</div>
+        <a href="/lessons/04-the-proposal/">The Proposal <span class="arrow">→</span></a>
+      </div>
+    </div>
+
+  </main>
+</LessonLayout>
+
+<style is:global>
+  .t-shell-prompt { color: var(--code-comment); user-select: none; }
+  .t-shell-cmd    { color: var(--code-fg); }
+</style>
+
+<style>
+  .lesson-divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 2.5rem 0;
+  }
+
+  .shell-block {
+    background: var(--surface-1);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1rem 1.25rem;
+    margin: 1rem 0;
+    overflow-x: auto;
+  }
+
+  .shell-block pre {
+    margin: 0;
+    font-family: var(--mono);
+    font-size: 0.9rem;
+  }
+
+  .exploration-chat {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+
+  .chat-msg {
+    padding: 1rem 1.25rem;
+    border-radius: 8px;
+    max-width: 90%;
+  }
+
+  .chat-msg.user {
+    background: var(--surface-2);
+    align-self: flex-end;
+    border-left: 3px solid var(--accent);
+  }
+
+  .chat-msg.ai {
+    background: var(--surface-1);
+    border-left: 3px solid var(--ink-3);
+  }
+
+  .chat-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--ink-3);
+    margin-bottom: 0.5rem;
+  }
+
+  .chat-text {
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .chat-text :global(code) {
+    background: var(--surface-2);
+    padding: 0.15rem 0.4rem;
+    border-radius: 3px;
+    font-size: 0.85em;
+  }
+
+  .callout {
+    padding: 1.25rem 1.5rem;
+    border-radius: 8px;
+    margin: 1.5rem 0;
+  }
+
+  .callout-exit {
+    background: var(--surface-2);
+    border-left: 4px solid var(--ink-3);
+  }
+
+  .callout-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--ink-3);
+    margin-bottom: 0.5rem;
+  }
+
+  .callout p {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+</style>
