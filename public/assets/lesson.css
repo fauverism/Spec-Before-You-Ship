@@ -488,7 +488,11 @@ pre code {
   margin-bottom: 10px;
 }
 
-.sidebar-signup form { display: flex; flex-direction: column; gap: 6px; }
+.sidebar-signup form {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
 
 .sidebar-signup input[type="email"] {
   font-family: var(--sans);
@@ -505,7 +509,7 @@ pre code {
 
 .sidebar-signup input:focus { border-color: var(--accent); }
 
-.sidebar-signup button {
+.sidebar-signup .sidebar-input-button {
   font-family: var(--mono);
   font-size: 11px;
   letter-spacing: 0.04em;
@@ -518,7 +522,7 @@ pre code {
   transition: background 0.15s;
 }
 
-.sidebar-signup button:hover { background: #a84908; }
+.sidebar-signup .sidebar-input-button:hover { background: #a84908; }
 
 /* ─── Companion box (dead — elements removed, CSS harmless) ───────────────── */
 
