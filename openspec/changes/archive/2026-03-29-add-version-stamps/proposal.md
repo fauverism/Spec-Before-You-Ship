@@ -1,10 +1,10 @@
 ## Why
 
-The course is in early development and readers have no way to know which version of the content they're viewing. Adding a visible version stamp (starting at `v0.0.1-alpha`) establishes a versioning convention and signals to early readers that the content is pre-release.
+The course is in early development and readers have no way to know which version of the content they're viewing. Adding a visible version stamp (starting at `v1.0.0`) establishes a versioning convention and signals what content version is published.
 
 ## What Changes
 
-- A version stamp (`v0.0.1-alpha`) is added to every lesson page (all 13 HTML files in `/lessons/`)
+- A version stamp (`v1.0.0`) is added to every lesson page (all 13 HTML files in `/lessons/`)
 - The stamp is visible but unobtrusive — does not compete with lesson content
 - Version string is consistent across all pages
 

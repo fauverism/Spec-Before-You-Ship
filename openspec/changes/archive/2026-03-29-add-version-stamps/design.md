@@ -5,7 +5,7 @@ The course site is 13 static HTML files in `lessons/`, each with its own inline 
 ## Goals / Non-Goals
 
 **Goals:**
-- Add a `v0.0.1-alpha` version string visibly to all 13 lesson pages
+- Add a `v1.0.0` version string visibly to all 13 lesson pages
 - Keep the stamp visually subtle — informational, not decorative
 - Be consistent in placement and styling across all pages
 
@@ -26,7 +26,7 @@ Alternative considered: header badge. Rejected — headers are functional naviga
 
 Inline HTML addition to the footer's existing structure — a `<span>` with a class like `footer-version`. Styled to match the existing muted footer text (`--ink-3` color variable, small monospace font to signal it's a technical identifier).
 
-Alternative considered: separate visible banner at top of page. Rejected — too prominent for an alpha tag; it should be visible but not distracting.
+Alternative considered: separate visible banner at top of page. Rejected — too prominent for a version tag; it should be visible but not distracting.
 
 **How to apply it across 13 files**
 
