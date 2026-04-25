@@ -63,7 +63,7 @@ The site is 13 static HTML files sharing a common chrome (sidebar, footer, mobil
 ## Risks / Trade-offs
 
 - **Content fidelity** → Mitigation: lesson HTML is pasted verbatim; visual regression check on every lesson after migration before merging
-- **URL breakage** → Mitigation: documented in proposal as acceptable for alpha; no redirects planned
+- **URL breakage** → Mitigation: documented in proposal as acceptable for this migration; no redirects planned
 - **Per-lesson `<style>` blocks** → Each lesson has a small `<style>` block for lesson-specific token colors and UI. These move into the `.astro` file's `<style is:global>` tag (Astro scopes `<style>` by default, which would break class-based selectors on content HTML — `is:global` disables scoping)
 - **Lesson 02 tab picker script** → The `pickTool()` function uses `event.target` from an inline `onclick` attribute. This works fine in Astro's `<script>` but must be declared on `window` or kept inline. Keep as `<script is:inline>` to preserve exact behavior.
 

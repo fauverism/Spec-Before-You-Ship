@@ -38,7 +38,7 @@ Each lesson page SHALL be served at `/lessons/<slug>/` (e.g., `/lessons/02-insta
 
 ### Scenario: Old `.html` URL is not required
 - **WHEN** a user navigates to `/lessons/02-install-and-init.html`
-- **THEN** there is no guarantee of a redirect (breakage is acceptable for alpha)
+- **THEN** there is no guarantee of a redirect (breakage is acceptable for this migration)
 
 ## Requirement: Per-lesson styles use `is:global` scoping
 Each lesson's `<style>` block SHALL use Astro's `is:global` attribute to prevent Astro from scoping class selectors, ensuring that class-based styles apply to slotted content HTML.

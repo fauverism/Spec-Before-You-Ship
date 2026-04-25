@@ -9,7 +9,7 @@ Note: `.footer-version` and `.footer-attribution` styles were added to `assets/s
 
 ## 2. Add Version Stamp HTML to Each Page
 
-- [x] 2.1 Add `<span class="footer-version">v0.0.1-alpha</span>` to footer in `index.html`
+- [x] 2.1 Add `<span class="footer-version">v1.0.0</span>` to footer in `index.html`
 - [x] 2.2 Add version stamp to `contact.html`
 - [x] 2.3 Add version stamp to `01-the-chaos-tax.html`
 - [x] 2.4 Add version stamp to `02-install-and-init.html`
@@ -27,5 +27,5 @@ Note: Lesson pages (01–11) did not previously have a footer. A `<footer class=
 
 ## 3. Verify
 
-- [x] 3.1 Open each page and confirm `v0.0.1-alpha` is visible in the footer
+- [x] 3.1 Open each page and confirm `v1.0.0` is visible in the footer
 - [x] 3.2 Confirm stamp is visually subdued (not competing with copyright or nav links)

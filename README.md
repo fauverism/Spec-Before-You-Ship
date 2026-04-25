@@ -4,7 +4,7 @@ A small learning site and example repository for using OpenSpec to plan, scope, 
 
 ## What's inside
 
-- `src/pages/lessons/` – 11 Astro lesson pages
+- `src/pages/lessons/` – 8 Astro lesson pages
 - `src/pages/` – `index.astro` (home) and `contact.astro`
 - `src/layouts/` – `LessonLayout.astro` and `PageLayout.astro`
 - `src/data/lessons.ts` – central lesson registry (slug, title, number)

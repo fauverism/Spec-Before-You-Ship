@@ -28,4 +28,4 @@ Every time a lesson is added or renamed, the sidebar nav must be updated in all 
 - **Files removed**: all `lessons/*.html` files (replaced by `.astro` equivalents)
 - **Files moved**: `assets/*.css` → `public/assets/*.css`
 - **Deployment**: Vercel continues to work; `vercel.json` may need `framework: "astro"` if not auto-detected
-- **Links**: any external links to `/lessons/*.html` URLs will 404 — no redirects planned (alpha release, acceptable breakage)
+- **Links**: any external links to `/lessons/*.html` URLs will 404 — no redirects planned (acceptable breakage)

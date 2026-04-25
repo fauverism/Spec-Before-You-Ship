@@ -1,5 +1,15 @@
 # Changelog
 
+## v1.0.0 — 2026-04-23
+
+### Release
+
+- Released Spec Before You Ship as the first official content version
+- Updated site version strings to `v1.0.0` across all pages
+- Registered `specbeforeyouship.com` and prepared launch messaging for newsletter, website, and direct outreach
+- Removed pre-release branding from release notes, specs, and version stamp requirements
+- Added launch copy guidance highlighting the chaos tax, lower AI token usage, and improved AI prompt/output quality
+
 ## v0.1.0 — 2026-04-20
 
 ### New Lesson: The Exploration
@@ -52,7 +62,7 @@
 
 ---
 
-## v0.0.3-alpha — 2026-04-14
+## v0.0.3 — 2026-04-14
 
 ### Astro Migration
 
@@ -83,9 +93,9 @@
 
 ---
 
-## v0.0.1-alpha — 2026-03-29
+## v0.0.1 — 2026-03-29
 
-Initial alpha release.
+Initial release.
 
 ### Course Content
 - 11 lessons covering spec-driven AI development, from motivation
@@ -96,7 +106,7 @@ Initial alpha release.
 ### Infrastructure
 - Shared stylesheet (`assets/site.css`) consolidating design tokens,
   reset, header, and footer styles across all pages
-- Version stamp (`v0.0.1-alpha`) in footer of every page
+- Version stamp (`v0.0.1`) in footer of every page
 - Footer attribution: © 2026 BridgeSpec, Created by Robert Fauver
 
 ### OpenSpec Workflow
