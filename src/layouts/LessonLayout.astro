@@ -60,11 +60,15 @@ const counter = `${String(lessonNum).padStart(2, '0')} / ${lessons.length}`;
     <div class="sidebar-title"><a href="/">Spec <span class="before-you-ship">Before You Ship</span></a></div>
 
     <nav>
-      {lessons.map(lesson => (
-        lesson.num === lessonNum
-          ? <a href="#" class="current"><span class="num">{String(lesson.num).padStart(2, '0')}</span>{lesson.title}</a>
-          : <a href={`/lessons/${lesson.slug}/`}><span class="num">{String(lesson.num).padStart(2, '0')}</span>{lesson.title}</a>
-      ))}
+      {lessons.map(lesson => {
+        const cls = lesson.num === lessonNum ? 'current'
+          : lesson.num < lessonNum ? 'done'
+          : 'upcoming';
+        const href = lesson.num === lessonNum ? '#' : `/lessons/${lesson.slug}/`;
+        return <a href={href} class={cls}>
+          <span class="num">{String(lesson.num).padStart(2, '0')}</span>{lesson.title}
+        </a>;
+      })}
     </nav>
 
     <div class="sidebar-theme">
