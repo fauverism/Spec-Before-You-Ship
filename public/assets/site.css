@@ -8,6 +8,8 @@
   --mono: 'Google Sans Code', monospace;
   --bg: #faf9f7;
   --surface: #f2f0eb;
+  --surface-1: #eae8e2;
+  --surface-2: #e0ddd7;
   --border: #e3e0d8;
   --border-strong: #ccc9bf;
   --ink: #1a1917;
@@ -195,6 +197,8 @@ body { font-family: var(--sans); font-weight: 300; line-height: 1; min-height: 1
 html.dark {
   --bg:           #002b36;
   --surface:      #073642;
+  --surface-1:    #0a3f50;
+  --surface-2:    #0d4c61;
   --border:       #1d3d47;
   --border-strong:#586e75;
   --ink:          #fdf6e3;

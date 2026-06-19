@@ -5,6 +5,7 @@ interface Props {
 }
 
 const { title, description } = Astro.props;
+const isContact = Astro.url.pathname.startsWith('/contact');
 ---
 
 <!DOCTYPE html>
@@ -33,8 +34,8 @@ const { title, description } = Astro.props;
   <a href="/" class="brand">Spec Before You Ship</a>
   <nav>
     <ul class="header-nav">
-      <li><a href="/lessons/01-the-chaos-tax/">Lessons</a></li>
-      <li><a href="/contact/">Contact</a></li>
+      <li><a href="/#curriculum">Lessons</a></li>
+      <li><a href="/contact/" class={isContact ? 'current' : ''}>Contact</a></li>
       <li>
         <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
           <svg id="icon-moon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13.5 9.5A6 6 0 0 1 6.5 2.5a6 6 0 1 0 7 7z" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -49,10 +50,10 @@ const { title, description } = Astro.props;
 
 <footer class="site-footer">
   <div class="footer-inner">
-    <span class="footer-copy">&copy; 2026 &mdash; <span class="footer-attribution">Created by <a href="https://robertfauver.com">Robert Fauver</a></span></span>
+    <span class="footer-copy">&copy; 2026 BridgeSpec &mdash; <span class="footer-attribution">Created by <a href="https://robertfauver.com">Robert Fauver</a></span></span>
     <ul class="footer-links">
       <li><a href="/">Home</a></li>
-      <li><a href="/lessons/01-the-chaos-tax/">Start Learning</a></li>
+      <li><a href="/lessons/01-the-chaos-tax/">Start Lesson 01</a></li>
       <li><a href="/contact/">Contact</a></li>
     </ul>
     <span class="footer-version">v1.0.0</span>
